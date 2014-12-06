@@ -1,0 +1,21 @@
+CXX=g++
+CFLAGS=-c -g -Wall
+LDFLAGS=-lcurl
+SOURCES=main.cpp
+OBJECTS=${SOURCES:.cpp=.o}
+EXECUTABLE=main
+
+all: ${SOURCES} ${EXECUTABLE}
+
+${EXECUTABLE}: ${OBJECTS}
+	${CXX} ${LDFLAGS} ${OBJECTS} -o $@
+
+.cpp.o:
+	${CXX} ${CFLAGS} $< -o $@ 
+
+clean:
+	rm -fr *.o ${EXECUTABLE}
+
+run: ${EXECUTABLE}
+	./${EXECUTABLE}
+
