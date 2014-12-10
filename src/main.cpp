@@ -1,11 +1,16 @@
 #include <curl/curl.h>
-
+#include <4DPlugin.h>
 #include <cstdlib>
 #include <iostream>
 
 using namespace std;
 
-int main(void) {
+int main(void)
+{
+    
+}
+
+int curlTest(void) {
 	CURL *curl;
 	CURLcode res;
 

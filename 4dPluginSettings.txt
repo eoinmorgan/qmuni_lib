@@ -1,0 +1,11 @@
+settings that work
+remove windows vs project
+use Ansi
+2.) combine high resolution artwork
+
+
+settings that dont work
+1.)Upgrad Base SDK Config to latest...'OSx 10.10'
+3.) upgrade Base SDK Config to latest...'OSx 10'
+4.)automatically select architectures
+5.)enable build active architecture only when debugging
