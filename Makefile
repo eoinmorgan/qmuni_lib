@@ -1,8 +1,13 @@
 DIST_PATH=dist
+PROJECT="4D Plugin.xcodeproj"
 EXECUTABLE=main
 
 all:
 	cd src && make
+	cd Wrappers && make
+
+
+	 
 
 dist:
 	@mkdir -p ${DIST_PATH}

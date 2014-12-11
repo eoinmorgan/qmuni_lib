@@ -1,5 +1,4 @@
 #include <curl/curl.h>
-#include <4DPlugin.h>
 #include <cstdlib>
 #include <iostream>
 

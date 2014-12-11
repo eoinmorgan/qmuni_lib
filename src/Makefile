@@ -1,5 +1,5 @@
 CXX=g++
-CFLAGS=-c -g -Wall
+CFLAGS=-c -g -Wall 
 LDFLAGS=-lcurl
 SOURCES=main.cpp
 OBJECTS=${SOURCES:.cpp=.o}
