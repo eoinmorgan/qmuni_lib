@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		009FFE731A3A7EFB00CD01CF /* libHttp.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 009FFE721A3A7EFB00CD01CF /* libHttp.0.dylib */; };
 		18B684F506944F2000CC6A1E /* 4DPluginAPI.c in Sources */ = {isa = PBXBuildFile; fileRef = 18B684EE06944F2000CC6A1E /* 4DPluginAPI.c */; };
 		6D00C205174544D400C6AD41 /* 4DPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D00C204174544D400C6AD41 /* 4DPlugin.cpp */; };
 		6D97559019AE189600579F0A /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D97558F19AE189600579F0A /* Carbon.framework */; };
@@ -14,6 +15,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		009FFE721A3A7EFB00CD01CF /* libHttp.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libHttp.0.dylib; path = ../../../src/libHttp.0.dylib; sourceTree = "<group>"; };
+		009FFE751A3A813800CD01CF /* http.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = http.h; path = ../../../src/http.h; sourceTree = "<group>"; };
 		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		189286350695AD8900B05D6E /* 4D Plugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "4D Plugin.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18B684EE06944F2000CC6A1E /* 4DPluginAPI.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = 4DPluginAPI.c; sourceTree = "<group>"; };
@@ -34,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				009FFE731A3A7EFB00CD01CF /* libHttp.0.dylib in Frameworks */,
 				6D97559019AE189600579F0A /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -41,9 +45,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		009FFE741A3A811B00CD01CF /* BSecure */ = {
+			isa = PBXGroup;
+			children = (
+				009FFE751A3A813800CD01CF /* http.h */,
+				009FFE721A3A7EFB00CD01CF /* libHttp.0.dylib */,
+			);
+			name = BSecure;
+			sourceTree = "<group>";
+		};
 		089C166AFE841209C02AAC07 /* 4D Plugin */ = {
 			isa = PBXGroup;
 			children = (
+				009FFE741A3A811B00CD01CF /* BSecure */,
 				6D97558F19AE189600579F0A /* Carbon.framework */,
 				18B684ED06944F2000CC6A1E /* SDK */,
 				08FB77ADFE841716C02AAC07 /* Source */,
@@ -203,7 +217,10 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/src",
+					/Users/a/git/bsecure_lib/src,
+				);
 				LIBRARY_STYLE = Bundle;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
@@ -237,7 +254,10 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(BUILT_PRODUCTS_DIR)/src",
+					/Users/a/git/bsecure_lib/src,
+				);
 				LIBRARY_STYLE = Bundle;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
@@ -269,7 +289,10 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/src",
+					/Users/a/git/bsecure_lib/src,
+				);
 				LIBRARY_STYLE = Bundle;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
@@ -292,7 +315,14 @@
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					BSecure,
+				);
 				OBJROOT = "$(SRCROOT)/build";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_LDFLAGS = "-L../../../src/libHttp.0.dylib";
 				SDKROOT = macosx10.10;
 				SYMROOT = "$(SRCROOT)/Sample.4dbase/Plugins";
 			};
@@ -305,7 +335,14 @@
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					BSecure,
+				);
 				OBJROOT = "$(SRCROOT)/build";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_LDFLAGS = "-L../../../src/libHttp.0.dylib";
 				SDKROOT = macosx10.10;
 				SYMROOT = "$(SRCROOT)";
 			};
@@ -317,6 +354,13 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					BSecure,
+				);
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_LDFLAGS = "-L../../../src/libHttp.0.dylib";
 				SDKROOT = macosx10.10;
 			};
 			name = Default;

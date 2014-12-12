@@ -3,7 +3,6 @@ PROJECT="4D Plugin.xcodeproj"
 EXECUTABLE=main
 
 all:
-	cd src && make
 	cd Wrappers && make
 
 
@@ -19,5 +18,6 @@ run:
 
 clean:
 	cd src && make clean
+	cd Wrappers && make clean
 	@rm -fr ${DIST_PATH}
 

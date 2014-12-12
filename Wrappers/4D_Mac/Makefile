@@ -3,8 +3,8 @@ CFLAGS=-c -g -Wall
 
 
 all: 
-	cd testPlugin && xcodebuild -project "4D Plugin.xcodeproj"
+	cd testPlugin && make
 
 clean:
-	rm -fr *.o ${EXECUTABLE}
+	cd testPlugin && make clean
 

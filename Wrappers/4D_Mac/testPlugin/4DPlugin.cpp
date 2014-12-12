@@ -11,7 +11,7 @@
 
 #include "4DPluginAPI.h"
 #include "4DPlugin.h"
-
+#include "src/http.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -41,8 +41,9 @@ void addNumbers( PA_PluginParameters params )
 	b = PA_GetLongParameter( params, 2 );
 
 	// --- write the code of addNumbers here...
-    returnValue = a + b;
-
+    HTTP call;
+    returnValue = call.addSomeNumbers(a, b);
+    
 	PA_ReturnLong( params, returnValue );
 }
 
