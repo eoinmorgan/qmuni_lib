@@ -2019,7 +2019,7 @@ PA_Pointer PA_GetPointerParameter( PA_PluginParameters params, short index )
 
 		if ( ptvar->fType == eVK_Pointer )
 		{
-			if ( ptvar->uValue.fPointer == 0 )	// m.c
+			if (( ptvar->uValue.fPointer == 0 ))	// m.c
 				return 0;
 			
 			return *ptvar->uValue.fPointer;
@@ -2537,7 +2537,7 @@ void PA_AcceptDeselect( PA_PluginParameters params, char accept )
 PA_DragAndDropInfo PA_GetDragAndDropInfo( PA_PluginParameters params )
 {
 	PA_Event			*ev;
-	PA_DragAndDropInfo	dropinfo = {{0}};
+	PA_DragAndDropInfo	dropinfo = {0};
 
 	ev = ( (PA_Event**) params->fParameters )[ 0 ];
 	if ( ev->fWhat == eAE_Drop || ev->fWhat == eAE_AllowDrop )
@@ -8329,8 +8329,6 @@ void PA_UseQuartzAxis( PA_PluginParameters params,short *outAreaX,short *outArea
 			context = (CGContextRef) props.fMacPort;
 			break;
 		}
-        default:
-            break;
 	}
 	if(context!=NULL)
 	{
@@ -8372,8 +8370,6 @@ void PA_UseQuickdrawAxis( PA_PluginParameters params,short *outAreaX,short *outA
 			context = (CGContextRef) props.fMacPort;
 			break;
 		}
-        default:
-            break;
 	}
 	if(context!=NULL)
 	{

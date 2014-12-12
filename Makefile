@@ -3,7 +3,8 @@ PROJECT="4D Plugin.xcodeproj"
 EXECUTABLE=main
 
 all:
-	cd Wrappers && make
+	cp -r src wrappers/4d_mac/testPlugin
+	cd wrappers && make
 
 
 	 
