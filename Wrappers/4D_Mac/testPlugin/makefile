@@ -1,4 +1,4 @@
-all: src
+all: 
 	xcodebuild -project "4D Plugin.xcodeproj"
 	
 clean:
