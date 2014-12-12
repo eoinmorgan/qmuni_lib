@@ -23,12 +23,16 @@ int main(int argc, char **argv) {
 		URI uri(argv[1]);
 		HTTPClientSession session(uri.getHost(), uri.getPort());
 
+		// http://bsecure/api/v0/session
 		string path(uri.getPathAndQuery());
 		if (path.empty()) path = "/";
 
+		// USE POST
+		// {"email":"x@src.bz","code":"591acbb20a20d8115f7cfd39b218948e"}
 		HTTPRequest req(HTTPRequest::HTTP_GET, path, HTTPMessage::HTTP_1_1);
 		session.sendRequest(req);
 
+		// expect 200 response
 		HTTPResponse res;
 		cout << res.getStatus() << " " << res.getReason() << endl;
 
