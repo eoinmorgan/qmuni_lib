@@ -13,36 +13,38 @@ using namespace Poco;
 using namespace std;
 
 int main(int argc, char **argv) {
-	if (argc != 2) {
-		cout << "Usage: " << argv[0] << " <url>" << endl;
-		cout << "			 fetch the <url> resource and output the result" << endl;
-		return -1;
-	}
-
 	try {
-		URI uri(argv[1]);
+		URI uri("http://bsecure/api/v0/session");
 		HTTPClientSession session(uri.getHost(), uri.getPort());
-
-		// http://bsecure/api/v0/session
+		
 		string path(uri.getPathAndQuery());
-		if (path.empty()) path = "/";
-
+		path = uri.getPath();
+		
+		
+		
 		// USE POST
 		// {"email":"x@src.bz","code":"591acbb20a20d8115f7cfd39b218948e"}
-		HTTPRequest req(HTTPRequest::HTTP_GET, path, HTTPMessage::HTTP_1_1);
-		session.sendRequest(req);
-
+		HTTPRequest req(HTTPRequest::HTTP_POST, path, HTTPMessage::HTTP_1_1);
+		req.setContentLength(2048);
+		std::ostream& outStream = session.sendRequest(req);
+		string json = "{\"email\":\"x@src.biz\",\"code\":\"591acbb20a20d8115f7cfd39b218948e\"}";
+		
+		outStream << json;
+		cout<<outStream;
+		req.write(outStream);
+		
+		
 		// expect 200 response
 		HTTPResponse res;
-		cout << res.getStatus() << " " << res.getReason() << endl;
-
-		istream &is = session.receiveResponse(res);
-		StreamCopier::copyStream64(is, cout);
+		std::istream& rs = session.receiveResponse(res);
+		cout << res.getStatus()<< " " << res.getReason() << " " << endl;
+		cout << " Response: " << session.receiveResponse(res) << endl;
+		//istream &is = session.receiveResponse(res);
+		//StreamCopier::copyStream64(is, cout);
 	} catch (Poco::Exception &ex) {
 		cerr << ex.displayText() << endl;
 		return -1;
 	}
-
+	
 	return 0;
 }
-
