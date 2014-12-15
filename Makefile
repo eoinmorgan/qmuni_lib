@@ -19,6 +19,6 @@ run:
 
 clean:
 	cd src && make clean
-	cd Wrappers && make clean
+	cd wrapper && make clean
 	@rm -fr ${DIST_PATH}
 

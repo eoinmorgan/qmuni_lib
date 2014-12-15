@@ -31,3 +31,6 @@ main
 # Ignore Distribution Path
 /dist
 
+# Ignore Macintosh Generated Files
+.DS_Store
+
