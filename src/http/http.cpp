@@ -14,37 +14,51 @@ using namespace Poco::Net;
 using namespace Poco;
 using namespace std;
 
-int main(int argc, char **argv) {
+string net_post( Uri uirInput, string dataInput) {
+	String outputString = "";
     if (argc != 2) {
-        cout << "Usage: " << argv[0] << " <url>" << endl;
-        cout << "			 fetch the <url> resource and output the result" << endl;
+        outputString = "Usage: " + argv[0] + " <url>" + endl;
+        outputString = outputString + "			 fetch the <url> resource and output the result" + endl;
         return -1;
     }
     
     try {
-        URI uri( http://bsecure/api/v0/session);
-        HTTPClientSession session(uri.getHost(), uri.getPort());
-        
-        // http://bsecure/api/v0/session
-        string path(uri.getPathAndQuery());
-       path = uri.getPath()
-        
-        // USE POST
-        // {"email":"x@src.bz","code":"591acbb20a20d8115f7cfd39b218948e"}
-        HTTPRequest req(HTTPRequest::HTTP_POST, path, HTTPMessage::HTTP_1_1);
-        std::ostream& outStream = session.sendRequest(req);
-        
-        // expect 200 response
-        HTTPResponse res;
-        cout << res.getStatus() << " " << res.getReason() << endl;
-        
-        istream &is = session.receiveResponse(res);
-        StreamCopier::copyStream64(is, cout);
+		Uri uir = uriInput;
+		HTTPClientSession session(uri.getHost(), uri.getPort());
+		HTTPRequest req(HTTPRequest::HTTP_POST, uri.getPathAndQuery(), HTTPMessage::HTTP_1_1);
+		string data = dataInput;
+		//req.set("User-Agent","BSecure Client 1.0");
+		//req.setHost("bsecure");
+		//req.setContentType("application/json\r\n");
+		req.setContentLength(data.length());
+		ostream& out = session.sendRequest(req);
+		out << data;
+		
+		// expect 200 response
+		HTTPResponse res;
+		istream& rs = session.receiveResponse(res);
+		
+		if (res.getStatus() != 200) {
+			outputString = "***** FAILED REQUEST" + endl;
+			// cout << res.getStatus() << " " << res.getReason() << endl;
+			//StreamCopier::copyStream(rs, cout);
+			// res.write(cout);
+		} else {
+			// output cookies if given in response
+			vector<HTTPCookie> cookies;
+			res.getCookies(cookies);
+			
+			for (vector<HTTPCookie>::iterator it = cookies.begin(); it != cookies.end(); ++it) {
+				outputString = outputString + "Cookie Name: " + it->getName() + endl;
+				outputString = outputString + "Cookie Value: " + it->getValue() + endl;
+			}
+		}
+
     } catch (Poco::Exception &ex) {
         cerr << ex.displayText() << endl;
-        return -1;
+        return outputString;
     }
     
-    return 0;
+    return outputString;
 }
 
