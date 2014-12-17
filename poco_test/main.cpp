@@ -15,8 +15,10 @@ using namespace Poco;
 using namespace std;
 
 // sudo tcpdump -i lo0 port 80 and dst 127.0.0.1
-int main(int argc, char **argv) {
+string httpPost(){
+	string outputString = "";
 	try {
+		
 		URI uri("http://bsecure/api/v0/session");
 		HTTPClientSession session(uri.getHost(), uri.getPort());
 		HTTPRequest req(HTTPRequest::HTTP_POST, uri.getPathAndQuery(), HTTPMessage::HTTP_1_1);
@@ -27,11 +29,11 @@ int main(int argc, char **argv) {
 		req.setContentLength(data.length());
 		ostream& out = session.sendRequest(req);
 		out << data;
-
+		
 		// expect 200 response
 		HTTPResponse res;
 		istream& rs = session.receiveResponse(res);
-
+		
 		if (res.getStatus() != 200) {
 			cout << "***** FAILED REQUEST" << endl;
 			// cout << res.getStatus() << " " << res.getReason() << endl;
@@ -40,18 +42,22 @@ int main(int argc, char **argv) {
 		} else {
 			// output cookies if given in response
 			vector<HTTPCookie> cookies;
-        	res.getCookies(cookies);
-
+			res.getCookies(cookies);
+			
 			for (vector<HTTPCookie>::iterator it = cookies.begin(); it != cookies.end(); ++it) {
-				cout << "Cookie Name: " << it->getName() << endl;
-				cout << "Cookie Value: " << it->getValue() << endl;
+				outputString = outputString + "Cookie Name: " + it->getName();
+				outputString = outputString + "Cookie Value: " + it->getValue();
 			}
 		}
 	} catch (Exception &ex) {
 		cerr << ex.displayText() << endl;
-		return 1;
+		return outputString;
 	}
-
-	return 0;
+	return outputString;
+	
 }
 
+int main(int argc, char **argv) {
+	cout << httpPost();
+		return 0;
+}

@@ -16,12 +16,6 @@ using namespace std;
 
 string net_post( Uri uirInput, string dataInput) {
 	String outputString = "";
-    if (argc != 2) {
-        outputString = "Usage: " + argv[0] + " <url>" + endl;
-        outputString = outputString + "			 fetch the <url> resource and output the result" + endl;
-        return -1;
-    }
-    
     try {
 		Uri uir = uriInput;
 		HTTPClientSession session(uri.getHost(), uri.getPort());
@@ -39,7 +33,7 @@ string net_post( Uri uirInput, string dataInput) {
 		istream& rs = session.receiveResponse(res);
 		
 		if (res.getStatus() != 200) {
-			outputString = "***** FAILED REQUEST" + endl;
+			outputString = "***** FAILED REQUEST";
 			// cout << res.getStatus() << " " << res.getReason() << endl;
 			//StreamCopier::copyStream(rs, cout);
 			// res.write(cout);
@@ -49,8 +43,8 @@ string net_post( Uri uirInput, string dataInput) {
 			res.getCookies(cookies);
 			
 			for (vector<HTTPCookie>::iterator it = cookies.begin(); it != cookies.end(); ++it) {
-				outputString = outputString + "Cookie Name: " + it->getName() + endl;
-				outputString = outputString + "Cookie Value: " + it->getValue() + endl;
+				outputString = outputString + "Cookie Name: " + it->getName();
+				outputString = outputString + "Cookie Value: " + it->getValue();
 			}
 		}
 

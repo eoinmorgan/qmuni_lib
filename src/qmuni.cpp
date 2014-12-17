@@ -1,33 +1,33 @@
-#include "http.h"
-#include <curl/curl.h>
-#include <cstdlib>
 #include <iostream>
+#include <vector>
+#include <string>
 
+#include <Poco/Net/HTTPClientSession.h>
+#include <Poco/Net/HTTPRequest.h>
+#include <Poco/Net/HTTPResponse.h>
+#include <Poco/Net/HTTPCookie.h>
+#include <Poco/StreamCopier.h>
+#include <Poco/Path.h>
+#include <Poco/URI.h>
+#include <Poco/Exception.h>
+
+#include "session_handler.h"
+
+#include "qmuni.h"
+//#include "HTTP/HTTP.h"
+
+using namespace Poco::Net;
+using namespace Poco;
 using namespace std;
+using namespace Net;
 
-int main(void)
-{
-    
-}
-/*
-int curlTest(void) {
-	CURL *curl;
-	CURLcode res;
+int main(int argc, char **argv) {
+	Session app_session;
 
-	cout << "BSecure Client Library Test" << endl;
-	cout << "###########################" << endl << endl;
+	//app_session.login("x@src.com","x");
+	//URI uri("http://bsecure/api/v0/session");
+	//BNet::HTTP.net_post(uri,"{\"email\":\"x@src.bz\",\"code\":\"1\"}");
 
-	curl = curl_easy_init();
-
-	if (curl) {
-		curl_easy_setopt(curl, CURLOPT_URL, "http://cweil.com/");
-		res = curl_easy_perform(curl);
-		curl_easy_cleanup(curl);
-	}
-
-	cout << endl;
-
-	return EXIT_SUCCESS;
+	return 0;	
 }
 
-*/
