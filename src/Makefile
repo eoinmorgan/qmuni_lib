@@ -1,7 +1,7 @@
 CXX=g++
 CFLAGS=-c -g -Wall
 LDFLAGS=-lPocoUtil -lPocoNet -lPocoFoundation
-SOURCES=qmuni.cpp session_handler.cpp
+SOURCES=qmuni.cpp net.cpp
 OBJECTS=${SOURCES:.cpp=.o}
 EXECUTABLE=qmuni
 

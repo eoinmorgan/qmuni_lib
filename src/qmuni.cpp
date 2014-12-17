@@ -11,22 +11,25 @@
 #include <Poco/URI.h>
 #include <Poco/Exception.h>
 
-#include "session_handler.h"
+//#include "session_handler.h"
 
 #include "qmuni.h"
-//#include "HTTP/HTTP.h"
+#include "net.h"
 
-using namespace Poco::Net;
-using namespace Poco;
 using namespace std;
-using namespace Net;
 
 int main(int argc, char **argv) {
-	Session app_session;
+	Poco::URI uri("http://bsecure/api/v0/session");
+	string data = "{\"email\":\"x@src.bz\",\"code\":\"1\"}";
 
-	//app_session.login("x@src.com","x");
-	//URI uri("http://bsecure/api/v0/session");
-	//BNet::HTTP.net_post(uri,"{\"email\":\"x@src.bz\",\"code\":\"1\"}");
+	cout.flush();
+	cout << data << endl;;
+
+	Net *net = new Net();
+	cout << net->http_post(uri, data) << endl;
+
+	delete net;
+	net = NULL;
 
 	return 0;	
 }
