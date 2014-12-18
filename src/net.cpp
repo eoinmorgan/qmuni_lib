@@ -121,9 +121,11 @@ string Net::http_put(string path, string data) {
 		
 		//req.set("User-Agent","BSecure Client 1.0");
 		//req.setHost("bsecure");
-		//req.setContentType("application/json\r\n");
+		req.setContentType("application/json");
 		
-		session.sendRequest(req);
+		req.setContentLength(data.length());
+		ostream& out = session.sendRequest(req);
+		out << data;
 		
 		
 		// expect 200 response

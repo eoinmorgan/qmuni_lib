@@ -18,25 +18,25 @@ SessionHandler(){
 	return 0;
 }
 
-SessionHandler(URI uriIn) {
-	SessionHandler m_uri = uriIn;
+SessionHandler(string uri) {
+	SessionHandler m_uri = uri;
 	SessionHandler m_token = "";
 	Session mod_session(m_uri);
 	
 	return 0;
 }
 
-SessionHandler(URI uriIn, string tokenIn) {
-	SessionHandler m_uri = uriIn;
-	SessionHandler m_token = tokenIn;
+SessionHandler(string uri, string token) {
+	SessionHandler m_uri = uri;
+	SessionHandler m_token = token;
 	Session mod_session = new Session(m_uri);
 	
 	return 0;
 }
 
-SessionHandler(URI uriIn, string tokenIn, SessionModel session) {
-	SessionHandler m_uri = uriIn;
-	SessionHandler m_token = tokenIn;
+SessionHandler(string uri, string token, SessionModel session) {
+	SessionHandler m_uri = uri;
+	SessionHandler m_token = token;
 	mod_session = session;
 	
 	return 0;
@@ -53,7 +53,9 @@ Poco::URI getUri() {
 	return m_uri;
 }
 
-int setUri(Poco::URI uriIn) {
-	m_uri = uriIn;
+int setUri(string uri) {
+	m_uri = uri;
+	
+	return 0;
 }
 

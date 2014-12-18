@@ -2,8 +2,6 @@
 #include <vector>
 #include <iostream>
 
-#include <Poco/URI.h>
-
 #include "session_model.h"
 
 using namespace std;
@@ -11,15 +9,16 @@ using namespace std;
 class SessionHandler {
 public:
 	SessionHandler(){}
-	SessionHandler(Poco::URI uri){}
-	SessionHandler(Poco::URI uriIn, string tokenIn, SessionModel session);
+	SessionHandler(string uri){}
+	SessionHandler(string uriIn, string token, SessionModel session);
 
 	int login(string user_name, string code);
 
-	Poco::URI getUri();
-	int setUri(Poco::URI uri);
+	string getUri();
+	int setUri(string uri);
 private:
 	string m_token;
-	Poco::URI m_uri;
+	string m_uri;
+	
 };
 

@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 
-#include <Poco/Exception.h>
+
 
 #include "qmuni.h"
 #include "net.h"
@@ -24,6 +24,9 @@ int main(int argc, char **argv) {
 	cout << net->http_get(uri) << endl;
 	cout << "put result: ";
 	cout << net->http_put(uri_post, data) << endl;
+	cout << "delete result: ";
+	cout << net->http_delete(uri_post) << endl;
+
 	
 	//SessionHandler *session_handler = new SessionHandler();
 	//session_handler->login(uri, data);
