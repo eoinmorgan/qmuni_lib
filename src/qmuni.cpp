@@ -2,34 +2,36 @@
 #include <vector>
 #include <string>
 
-#include <Poco/Net/HTTPClientSession.h>
-#include <Poco/Net/HTTPRequest.h>
-#include <Poco/Net/HTTPResponse.h>
-#include <Poco/Net/HTTPCookie.h>
-#include <Poco/StreamCopier.h>
-#include <Poco/Path.h>
-#include <Poco/URI.h>
 #include <Poco/Exception.h>
-
-//#include "session_handler.h"
 
 #include "qmuni.h"
 #include "net.h"
+#include "session_handler.h"
 
 using namespace std;
 
 int main(int argc, char **argv) {
-	Poco::URI uri("http://bsecure/api/v0/session");
-	string data = "{\"email\":\"x@src.bz\",\"code\":\"1\"}";
+	string uri_post = "http://mocksvc.mulesoft.com/mocks/487209f4-65da-4576-acbd-c89231ea860f/book";
+		string uri = "http://mocksvc.mulesoft.com/mocks/487209f4-65da-4576-acbd-c89231ea860f/book";
+	string data = "{}";//"{\"email\":\"x@src.bz\",\"code\":\"1\"}";
 
-	cout.flush();
-	cout << data << endl;;
+	
 
 	Net *net = new Net();
-	cout << net->http_post(uri, data) << endl;
+	cout << "post result: ";
+	cout << net->http_post(uri_post, data) << endl;
+	cout << "get result: ";
+	cout << net->http_get(uri) << endl;
+	cout << "put result: ";
+	cout << net->http_put(uri_post, data) << endl;
+	
+	//SessionHandler *session_handler = new SessionHandler();
+	//session_handler->login(uri, data);
 
 	delete net;
 	net = NULL;
+	//delete session_handler;
+	//session_handler = NULL;
 
 	return 0;	
 }

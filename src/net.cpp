@@ -12,18 +12,86 @@
 
 #include "net.h"
 
+#define POCO_POST  Poco::Net::HTTPRequest::HTTP_POST
+#define POCO_PUT  Poco::Net::HTTPRequest::HTTP_PUT
+#define POCO_GET  Poco::Net::HTTPRequest::HTTP_GET
+#define POCO_DELETE  Poco::Net::HTTPRequest::HTTP_DELETE
+#define POCO_HEAD  Poco::Net::HTTPRequest::HTTP_HEAD
+#define POCO_CONNECT  Poco::Net::HTTPRequest::HTTP_CONNECT
+
 using namespace std;
 
 // sudo tcpdump -i lo0 port 80 and dst 127.0.0.1
-string Net::http_post(Poco::URI uri, string data) {
+string Net::http_get(string path) {
 	string result = "";
-
+	Poco::URI uri(path);
 	try {
 		Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
-		Poco::Net::HTTPRequest req(Poco::Net::HTTPRequest::HTTP_POST, uri.getPathAndQuery(), Poco::Net::HTTPMessage::HTTP_1_1);
+		Poco::Net::HTTPRequest req(POCO_GET, uri.getPathAndQuery(), Poco::Net::HTTPMessage::HTTP_1_1);
+		
 		//req.set("User-Agent","BSecure Client 1.0");
 		//req.setHost("bsecure");
 		//req.setContentType("application/json\r\n");
+		
+		session.sendRequest(req);
+		
+		
+		// expect 200 response
+		Poco::Net::HTTPResponse res;
+		istream& rs = session.receiveResponse(res);
+		std::istreambuf_iterator<char> eos;
+		std::string response_string(std::istreambuf_iterator<char>(rs), eos);
+		result = response_string;
+		}
+	 catch (Poco::Exception &ex) {
+		cerr << ex.displayText() << endl;
+	}
+	
+	return result;
+}
+string Net::http_delete(string path) {
+	string result = "";
+	Poco::URI uri(path);
+	
+	try {
+		Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
+		Poco::Net::HTTPRequest req(POCO_DELETE, uri.getPathAndQuery(), Poco::Net::HTTPMessage::HTTP_1_1);
+		
+		//req.set("User-Agent","BSecure Client 1.0");
+		//req.setHost("bsecure");
+		//req.setContentType("application/json\r\n");
+		
+		session.sendRequest(req);
+		
+		
+		// expect 200 response
+		Poco::Net::HTTPResponse res;
+		istream& rs = session.receiveResponse(res);
+		std::istreambuf_iterator<char> eos;
+		std::string response_string(std::istreambuf_iterator<char>(rs), eos);
+		result = response_string;
+		
+		}
+	 catch (Poco::Exception &ex) {
+		cerr << ex.displayText() << endl;
+	}
+	
+	return result;
+}
+
+string Net::http_post(string path, string data) {
+	string result = "";
+	Poco::URI uri(path);
+
+	try {
+		Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
+		Poco::Net::HTTPRequest req(POCO_POST, uri.getPathAndQuery(), Poco::Net::HTTPMessage::HTTP_1_1);
+		
+		//req.set("User-Agent","BSecure Client 1.0");
+		//req.setHost("bsecure");
+		req.setContentType("application/json");
+		
+
 		req.setContentLength(data.length());
 		ostream& out = session.sendRequest(req);
 		out << data;
@@ -31,30 +99,45 @@ string Net::http_post(Poco::URI uri, string data) {
 		// expect 200 response
 		Poco::Net::HTTPResponse res;
 		istream& rs = session.receiveResponse(res);
+		std::istreambuf_iterator<char> eos;
+		std::string response_string(std::istreambuf_iterator<char>(rs), eos);
+		result = response_string;
 		
-		if (res.getStatus() != 200) {
-			result = "***** FAILED REQUEST";
-			// cout << result;
-			// cout << res.getStatus() << " " << res.getReason() << endl;
-			Poco::StreamCopier::copyStream(rs, cout);
-			// res.write(cout);
-		} else {
-			// output cookies if given in response
-			vector<Poco::Net::HTTPCookie> cookies;
-			res.getCookies(cookies);
-			// printf("%d",cookies.size());
-			// cout << "sucess";
-
-			for (vector<Poco::Net::HTTPCookie>::iterator it = cookies.begin(); it != cookies.end(); ++it) {
-				result = result + "Cookie Name: " + it->getName();
-				result = result + "Cookie Value: " + it->getValue();
-				// cout << result;
-			}
 		}
-	} catch (Poco::Exception &ex) {
+	catch (Poco::Exception &ex) {
 		cerr << ex.displayText() << endl;
 	}
 
 	return result;
 }
+
+string Net::http_put(string path, string data) {
+	string result = "";
+	Poco::URI uri(path);
+
+	try {
+		Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
+		Poco::Net::HTTPRequest req(POCO_PUT, uri.getPathAndQuery(), Poco::Net::HTTPMessage::HTTP_1_1);
+		
+		//req.set("User-Agent","BSecure Client 1.0");
+		//req.setHost("bsecure");
+		//req.setContentType("application/json\r\n");
+		
+		session.sendRequest(req);
+		
+		
+		// expect 200 response
+		Poco::Net::HTTPResponse res;
+		istream& rs = session.receiveResponse(res);
+		std::istreambuf_iterator<char> eos;
+		std::string response_string(std::istreambuf_iterator<char>(rs), eos);
+		result = response_string;
+		}
+	 catch (Poco::Exception &ex) {
+		cerr << ex.displayText() << endl;
+	}
+	
+	return result;
+}
+
 

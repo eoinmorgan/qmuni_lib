@@ -1,4 +1,4 @@
-#include <Poco/URI.h>
+
 #include <string>
 
 using namespace std;
@@ -6,9 +6,9 @@ using namespace std;
 class Net {
 
 public:
-	string http_post(Poco::URI uri, string data);
-   	string http_put(Poco::URI uri, string data);
-	string http_get(Poco::URI uri);
-	string http_delete(Poco::URI uri);
+	string http_post(string uri, string data);
+   	string http_put(string uri, string data);
+	string http_get(string uri);
+	string http_delete(string uri);
 };
 
