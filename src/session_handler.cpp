@@ -26,8 +26,8 @@ SessionHandler(string uri) {
 	return 0;
 }
 
-SessionHandler(string uri, string token) {
-	SessionHandler m_uri = uri;
+SessionHandler::SessionHandler(string uri, string token) {
+	m_uri = uri;
 	SessionHandler m_token = token;
 	Session mod_session = new Session(m_uri);
 	

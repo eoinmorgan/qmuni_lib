@@ -22,79 +22,57 @@
 using namespace std;
 
 // sudo tcpdump -i lo0 port 80 and dst 127.0.0.1
-string Net::http_get(string path) {
+
+string Net::http_get(string path, string data, map<string, string> *headers) {
 	string result = "";
-	Poco::URI uri(path);
-	try {
-		Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
-		Poco::Net::HTTPRequest req(POCO_GET, uri.getPathAndQuery(), Poco::Net::HTTPMessage::HTTP_1_1);
-		
-		//req.set("User-Agent","BSecure Client 1.0");
-		//req.setHost("bsecure");
-		//req.setContentType("application/json\r\n");
-		
-		session.sendRequest(req);
-		
-		
-		// expect 200 response
-		Poco::Net::HTTPResponse res;
-		istream& rs = session.receiveResponse(res);
-		std::istreambuf_iterator<char> eos;
-		std::string response_string(std::istreambuf_iterator<char>(rs), eos);
-		result = response_string;
-		}
-	 catch (Poco::Exception &ex) {
-		cerr << ex.displayText() << endl;
-	}
-	
-	return result;
-}
-string Net::http_delete(string path) {
-	string result = "";
-	Poco::URI uri(path);
-	
-	try {
-		Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
-		Poco::Net::HTTPRequest req(POCO_DELETE, uri.getPathAndQuery(), Poco::Net::HTTPMessage::HTTP_1_1);
-		
-		//req.set("User-Agent","BSecure Client 1.0");
-		//req.setHost("bsecure");
-		//req.setContentType("application/json\r\n");
-		
-		session.sendRequest(req);
-		
-		
-		// expect 200 response
-		Poco::Net::HTTPResponse res;
-		istream& rs = session.receiveResponse(res);
-		std::istreambuf_iterator<char> eos;
-		std::string response_string(std::istreambuf_iterator<char>(rs), eos);
-		result = response_string;
-		
-		}
-	 catch (Poco::Exception &ex) {
-		cerr << ex.displayText() << endl;
-	}
-	
+	result = http_call(POCO_PUT,path, data, *headers);
 	return result;
 }
 
-string Net::http_post(string path, string data) {
+
+
+string Net::http_delete(string path, map<string, *string> headers) {
+	string result = "";
+	result = http_call(POCO_PUT,path, *headers);
+	return result;
+}
+
+string Net::http_post(string path, string data, map<string, string> *headers) {
+	string result = "";
+	result = http_call(POCO_POST, path, data, *headers);
+	return result;
+}
+
+
+string Net::http_put(string path, string data, map<string, string> *headers) {
+	string result = "";
+	result = http_call(POCO_PUT,path, data, *headers);
+	return result;
+}
+
+
+
+string Net::http_call(string call, string path, string data, map<string, string> *headers){
 	string result = "";
 	Poco::URI uri(path);
-
+	
 	try {
 		Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
-		Poco::Net::HTTPRequest req(POCO_POST, uri.getPathAndQuery(), Poco::Net::HTTPMessage::HTTP_1_1);
-		
+		Poco::Net::HTTPRequest req(call, uri.getPathAndQuery(), Poco::Net::HTTPMessage::HTTP_1_1);
+ 
 		//req.set("User-Agent","BSecure Client 1.0");
 		//req.setHost("bsecure");
-		req.setContentType("application/json");
-		
+		//pointer *
+		if (headers != NULL)
+			headers_obj = headers&;
+			editHeader(req,headers_obj);
 
-		req.setContentLength(data.length());
-		ostream& out = session.sendRequest(req);
-		out << data;
+		if (data != NULL) {
+			req.setContentLength(data->length());
+			ostream& out = session.sendRequest(req);
+			out << data&;
+
+		}
 		
 		// expect 200 response
 		Poco::Net::HTTPResponse res;
@@ -102,44 +80,29 @@ string Net::http_post(string path, string data) {
 		std::istreambuf_iterator<char> eos;
 		std::string response_string(std::istreambuf_iterator<char>(rs), eos);
 		result = response_string;
-		
-		}
+ 
+	}
 	catch (Poco::Exception &ex) {
 		cerr << ex.displayText() << endl;
 	}
-
-	return result;
-}
-
-string Net::http_put(string path, string data) {
-	string result = "";
-	Poco::URI uri(path);
-
-	try {
-		Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
-		Poco::Net::HTTPRequest req(POCO_PUT, uri.getPathAndQuery(), Poco::Net::HTTPMessage::HTTP_1_1);
-		
-		//req.set("User-Agent","BSecure Client 1.0");
-		//req.setHost("bsecure");
-		req.setContentType("application/json");
-		
-		req.setContentLength(data.length());
-		ostream& out = session.sendRequest(req);
-		out << data;
-		
-		
-		// expect 200 response
-		Poco::Net::HTTPResponse res;
-		istream& rs = session.receiveResponse(res);
-		std::istreambuf_iterator<char> eos;
-		std::string response_string(std::istreambuf_iterator<char>(rs), eos);
-		result = response_string;
-		}
-	 catch (Poco::Exception &ex) {
-		cerr << ex.displayText() << endl;
-	}
 	
 	return result;
-}
+ }
 
+int Net::editHeader(Poco::Net::MessageHeader header, map<string, string> headers ){
+	map<string, string>::iterator it;
+	for(  it = headers.begin(); it !=headers.end(); it++){
+		try {
+			cout << it->first;
+			header[it->first];
+			header.set(it->first, it->second);
+			cout << it->first;
+		} catch (Poco::NotFoundException e) {
+			header.set(it->first,it->second);
+		}
+	
+	}
+	header[it->first];
+	return 0;
+}
 
