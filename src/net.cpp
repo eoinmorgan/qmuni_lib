@@ -23,86 +23,78 @@ using namespace std;
 
 // sudo tcpdump -i lo0 port 80 and dst 127.0.0.1
 
-string Net::http_get(string path, string data, map<string, string> *headers) {
-	string result = "";
-	result = http_call(POCO_PUT,path, data, *headers);
-	return result;
+string Net::httpGet(string path, map<string, string> &headers) {
+	string empty;
+	return httpCall(POCO_GET, path, empty, headers);
+}
+
+string Net::httpDelete(string path, map<string, string> &headers) {
+	string empty;
+	return httpCall(POCO_DELETE, path, empty, headers);
+}
+
+// TODO assert that data is not empty
+string Net::httpPost(string path, string &data, map<string, string> &headers) {
+	return httpCall(POCO_POST, path, data, headers);
 }
 
 
-
-string Net::http_delete(string path, map<string, *string> headers) {
-	string result = "";
-	result = http_call(POCO_PUT,path, *headers);
-	return result;
+// TODO assert that data is not empty
+string Net::httpPut(string path, string &data, map<string, string> &headers) {
+	return httpCall(POCO_PUT, path, data, headers);
 }
 
-string Net::http_post(string path, string data, map<string, string> *headers) {
+string Net::httpCall(string call, string path, string &data, map<string, string> &headers) {
 	string result = "";
-	result = http_call(POCO_POST, path, data, *headers);
-	return result;
-}
-
-
-string Net::http_put(string path, string data, map<string, string> *headers) {
-	string result = "";
-	result = http_call(POCO_PUT,path, data, *headers);
-	return result;
-}
-
-
-
-string Net::http_call(string call, string path, string data, map<string, string> *headers){
-	string result = "";
+	bool hasData = false;
 	Poco::URI uri(path);
-	
+
 	try {
 		Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
 		Poco::Net::HTTPRequest req(call, uri.getPathAndQuery(), Poco::Net::HTTPMessage::HTTP_1_1);
  
 		//req.set("User-Agent","BSecure Client 1.0");
 		//req.setHost("bsecure");
-		//pointer *
-		if (headers != NULL)
-			headers_obj = headers&;
-			editHeader(req,headers_obj);
 
-		if (data != NULL) {
-			req.setContentLength(data->length());
-			ostream& out = session.sendRequest(req);
-			out << data&;
+		// add or replace headers for this request
+		addHeadersToRequest(req, headers);
 
+		if (!data.empty()) {
+			hasData = true;
 		}
-		
-		// expect 200 response
+
+		// update length of content if data was given
+		if (hasData) {
+			req.setContentLength(data.length());
+		}
+
+		// send the request to the server
+		ostream& out = session.sendRequest(req);
+
+		// send the data to the server in the body of the request
+		if (hasData) {
+			out << data;
+		}
+
+		// collect the response from the server
 		Poco::Net::HTTPResponse res;
 		istream& rs = session.receiveResponse(res);
+
+		// TODO don't do this
+		// convert the stream response to a string
 		std::istreambuf_iterator<char> eos;
 		std::string response_string(std::istreambuf_iterator<char>(rs), eos);
 		result = response_string;
- 
-	}
-	catch (Poco::Exception &ex) {
+	} catch (Poco::Exception &ex) {
 		cerr << ex.displayText() << endl;
 	}
-	
+
 	return result;
  }
 
-int Net::editHeader(Poco::Net::MessageHeader header, map<string, string> headers ){
-	map<string, string>::iterator it;
-	for(  it = headers.begin(); it !=headers.end(); it++){
-		try {
-			cout << it->first;
-			header[it->first];
-			header.set(it->first, it->second);
-			cout << it->first;
-		} catch (Poco::NotFoundException e) {
-			header.set(it->first,it->second);
-		}
-	
+void Net::addHeadersToRequest(Poco::Net::HTTPRequest &request, map<string, string> &headers) {
+	for (map<string, string>::iterator it = headers.begin(); it != headers.end(); ++it) {
+		request.set(it->first, it->second);
 	}
-	header[it->first];
-	return 0;
 }
 

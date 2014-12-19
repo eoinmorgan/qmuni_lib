@@ -2,30 +2,18 @@
 #include <string>
 #include <map>
 
-#include <Poco/Net/MessageHeader.h>
-
-
+#include <Poco/Net/HTTPRequest.h>
 
 using namespace std;
 
-
 class Net {
-
 public:
-
-	string http_post(string path, string data, map<string, string> *headers);
-	
-	
-	string http_put(string uri, string data, map<string, string> *headers);
-	
-	
-	string http_get(string uri, string data, map<string, string> *headers);
-	
-	
-	string http_delete(string uri, map<string, string> *headers);
+	string httpPost(string path, string &data, map<string, string> &headers);
+	string httpPut(string uri, string &data, map<string, string> &headers);
+	string httpGet(string uri, map<string, string> &headers);
+	string httpDelete(string uri, map<string, string> &headers);
 private:
-	
-	int editHeader(Poco::Net::MessageHeader header, map<string, string> headers);
-	string http_call(string call, string path, string *data, map<string, string> *headers);
+	void addHeadersToRequest(Poco::Net::HTTPRequest &request, map<string, string> &headers);
+	string httpCall(string call, string path, string &data, map<string, string> &headers);
 };
 

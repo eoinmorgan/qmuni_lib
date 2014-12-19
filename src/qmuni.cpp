@@ -3,36 +3,37 @@
 #include <string>
 #include <unordered_map>
 
-#include "qmuni.h"
 #include "net.h"
-#include "session_handler.h"
+// #include "session_handler.h"
 
-
+#include "qmuni.h"
 
 using namespace std;
 
 string url = PROTOCOL + "://" + SERVER + "/api/v" + VERSION;
 
-int main(int argc, char **argv) {
-	string uri_post = "http://mocksvc.mulesoft.com/mocks/487209f4-65da-4576-acbd-c89231ea860f/book";
-		string uri = "http://mocksvc.mulesoft.com/mocks/487209f4-65da-4576-acbd-c89231ea860f/book";
-	string data = "{}";//"{\"email\":\"x@src.bz\",\"code\":\"1\"}";
+// debug the network connection
+void debugNet() {
+	Net *net = new Net();
+	map<string, string> noHeaders;
+	map<string, string> jsonHeader;
+	string uri = "http://mocksvc.mulesoft.com/mocks/487209f4-65da-4576-acbd-c89231ea860f/book";
+	string data = "{\"email\":\"x@src.bz\",\"code\":\"1\"}";
 
 	cout << "url: " << url << endl;
 
-	Net *net = new Net();
-	map<string, string> maps;
-	maps.insert (make_pair<string , string>("Content-Type","application/json"));
+	jsonHeader.insert(make_pair<string, string>("Content-Type", "application/json"));
+	jsonHeader.insert(make_pair<string, string>("User-Agent", "Qmuni Client Library v1"));
+	noHeaders.insert(make_pair<string, string>("User-Agent", "Qmuni Client Library v1"));
 	
 	cout << "post result: ";
-	cout << net->http_post(uri_post, data, NULL) << endl;
+	cout << net->httpPost(uri, data, jsonHeader) << endl;
 	cout << "get result: ";
-	cout << net->http_get(uri_post, NULL, NULL) << endl;
+	cout << net->httpGet(uri, noHeaders) << endl;
 	cout << "put result: ";
-	cout << net->http_put(uri_post, data, NULL) << endl;
+	cout << net->httpPut(uri, data, jsonHeader) << endl;
 	cout << "delete result: ";
-	cout << net->http_delete(uri_post, NULL) << endl;
-
+	cout << net->httpDelete(uri, noHeaders) << endl;
 	
 	//SessionHandler *session_handler = new SessionHandler();
 	//session_handler->login(uri, data);
@@ -41,6 +42,10 @@ int main(int argc, char **argv) {
 	net = NULL;
 	//delete session_handler;
 	//session_handler = NULL;
+}
+
+int main(int argc, char **argv) {
+	debugNet();
 
 	return 0;	
 }
