@@ -35,17 +35,21 @@ void debugNet() {
 	cout << "delete result: ";
 	cout << net->httpDelete(uri, noHeaders) << endl;
 	
-	//SessionHandler *session_handler = new SessionHandler();
-	//session_handler->login(uri, data);
-
+	
 	delete net;
 	net = NULL;
-	//delete session_handler;
-	//session_handler = NULL;
+	
 }
+void debugSessionModel(){
+	SessionHandler *session_handler = new SessionHandler();
+	session_handler->login(uri, data);
+	
+	delete session_handler;
+	session_handler = NULL;
 
+}
 int main(int argc, char **argv) {
-	debugNet();
+	debugSessionModel();
 
 	return 0;	
 }
