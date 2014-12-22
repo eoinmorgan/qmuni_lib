@@ -1,6 +1,7 @@
 // public header file
 
 #include <string>
+#include "session_handler.h"
 
 using namespace std;
 

@@ -1,8 +1,9 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <string>
 
-#include <Poco/URI.h>
+#include "net.h"
 
 using namespace std;
 
@@ -11,11 +12,13 @@ private:
 	string m_userName;
 	string m_emailAddres;
 	string m_token;
+	string m_uri;
+	Net m_net;
 	bool m_login_status;
 public:
 	SessionModel();
-	SessionModel(Poco::URI uri);
-	SessionModel(Poco::URI uri, string token);
+	SessionModel(string uri);
+	SessionModel(string uri, string token);
 	string login(string userName, string code);
 
 	string get_user_name() { return m_userName; };

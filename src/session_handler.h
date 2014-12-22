@@ -8,11 +8,11 @@ using namespace std;
 
 class SessionHandler {
 public:
-	SessionHandler(){}
-	SessionHandler(string uri){}
+	SessionHandler();
+	SessionHandler(string uri);
 	SessionHandler(string uriIn, string token, SessionModel session);
-
-	int login(string user_name, string code);
+	SessionModel m_session_model;
+	string login(string userName, string code);
 
 	string getUri();
 	int setUri(string uri);

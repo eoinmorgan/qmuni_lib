@@ -23,6 +23,10 @@ using namespace std;
 
 // sudo tcpdump -i lo0 port 80 and dst 127.0.0.1
 
+Net::Net(){
+	test = 1;
+}
+
 string Net::httpGet(string path, map<string, string> &headers) {
 	string empty;
 	return httpCall(POCO_GET, path, empty, headers);

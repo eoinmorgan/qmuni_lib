@@ -3,8 +3,7 @@
 #include <string>
 #include <unordered_map>
 
-#include "net.h"
-// #include "session_handler.h"
+
 
 #include "qmuni.h"
 
@@ -13,6 +12,7 @@ using namespace std;
 string url = PROTOCOL + "://" + SERVER + "/api/v" + VERSION;
 
 // debug the network connection
+/*
 void debugNet() {
 	Net *net = new Net();
 	map<string, string> noHeaders;
@@ -40,16 +40,20 @@ void debugNet() {
 	net = NULL;
 	
 }
+*/
 void debugSessionModel(){
-	SessionHandler *session_handler = new SessionHandler();
-	session_handler->login(uri, data);
+
+	SessionHandler *session_handler = new SessionHandler("http://mocksvc.mulesoft.com/mocks/487209f4-65da-4576-acbd-c89231ea860f/book");
+	string data = "{\"email\":\"x@src.bz\",\"code\":\"1\"}";
+	cout << session_handler->login(url, data);
 	
 	delete session_handler;
 	session_handler = NULL;
 
 }
+
 int main(int argc, char **argv) {
-	debugSessionModel();
+	//debugNet();
 
 	return 0;	
 }
