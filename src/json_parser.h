@@ -1,14 +1,14 @@
-#include "rapidjson/document.h"
-#include "rapidjson/writer.h"
-#include "rapidjson/stringbuffer.h"
+#include "rapidjson/reader.h"
 #include <iostream>
+
+#include "session_model.h"
+
 
 using namespace std;
 
-class Json{
+class JsonParser{
 public:
-	type getJson(string json);
-	string objToJson(type object);
-	private:
-	
+	Model decode(Model model, const char json[]);
+	string encode(Model model);
+	bool isValidJson(string str);
 };

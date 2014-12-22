@@ -2,12 +2,13 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include "rapidjson/reader.h"
 
 #include "net.h"
 
 using namespace std;
 
-class SessionModel {
+class Model {
 private:
 	string m_userName;
 	string m_emailAddres;
@@ -15,10 +16,11 @@ private:
 	string m_uri;
 	Net m_net;
 	bool m_login_status;
+	void debugNet();
 public:
-	SessionModel();
-	SessionModel(string uri);
-	SessionModel(string uri, string token);
+	Model();
+	Model(string uri);
+	Model(string uri, string token);
 	string login(string userName, string code);
 
 	string get_user_name() { return m_userName; };
@@ -30,5 +32,21 @@ public:
 	int set_email_address(string input_addresss);
 	int set_token(string input_token);
 	int set_login(bool input_login_status);
+
+	bool Null();
+    bool Bool(bool b);
+    bool Int(int i);
+    bool Uint(unsigned u);
+    bool Int64(int64_t i);
+    bool Uint64(uint64_t u);
+    bool Double(double d);
+    bool String(const char* str, rapidjson::SizeType length, bool copy);
+    bool StartObject();
+    bool Key(const char* str, rapidjson::SizeType length, bool copy);
+    bool EndObject(rapidjson::SizeType memberCount);
+    bool StartArray();
+    bool EndArray(rapidjson::SizeType elementCount);
 };
+
+
 
