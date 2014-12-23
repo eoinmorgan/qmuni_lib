@@ -1,7 +1,7 @@
 CXX=g++
 CFLAGS=-c -g -Wall
 LDFLAGS=-lPocoUtil -lPocoNet -lPocoFoundation 
-SOURCES=qmuni.cpp net.cpp session_handler.cpp session_model.cpp json_parser.cpp net_cookie_jar.cpp
+SOURCES=qmuni.cpp net.cpp session_handler.cpp session_model.cpp json_parser.cpp net_cookie_jar.cpp model.cpp
 OBJECTS=${SOURCES:.cpp=.o}
 EXECUTABLE=qmuni
 

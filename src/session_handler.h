@@ -11,7 +11,7 @@ public:
 	SessionHandler();
 	SessionHandler(string uri);
 	SessionHandler(string uriIn, string token, Model session);
-	Model m_session_model;
+	SessionModel m_session_model;
 	string login(string userName, string code);
 
 	string getUri();
