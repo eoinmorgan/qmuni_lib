@@ -15,7 +15,7 @@ using namespace Poco;
 using namespace std;
 
 // sudo tcpdump -i lo0 port 80 and dst 127.0.0.1
-string httpPost(){
+istream& httpPost(){
 	string outputString = "";
 	try {
 		
@@ -40,7 +40,7 @@ string httpPost(){
 			StreamCopier::copyStream(rs, cout);
 			// res.write(cout);
 		} else {
-			// output cookies if given in response
+			// output cookies if given in responsecd
 			vector<HTTPCookie> cookies;
 			res.getCookies(cookies);
 			
@@ -51,9 +51,9 @@ string httpPost(){
 		}
 	} catch (Exception &ex) {
 		cerr << ex.displayText() << endl;
-		return outputString;
+		return rs;
 	}
-	return outputString;
+	return rs;
 	
 }
 

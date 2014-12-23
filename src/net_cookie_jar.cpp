@@ -5,18 +5,15 @@ using namespace std;
 
 CookieJar::CookieJar(){
 
-	vector<Poco::Net::HTTPCookie> jar;
+	map<string, Poco::Net::HTTPCookie> m_jar;
+
 }
 
-int CookieJar::addCookie(Poco::Net::HTTPCookie cookie){
+void CookieJar::addCookie(Poco::Net::HTTPCookie cookie){
 
-	// status = -1 no set cook status found
-	// status = 0 set cookie found and matches existing cookie name cookie overwritten 
-	// status = 1 set cookie found and does not match any cookies in jar new cookie added
-	int status = 0;
-
-
-	return status;
+	map<string , Poco::Net::HTTPCookie>::iterator jar_it;
+	string name = cookie.getName();	
+	m_jar[name]=cookie;
 }
 
 int CookieJar::sendCookies(){
