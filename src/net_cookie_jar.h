@@ -1,12 +1,12 @@
-#include <Poco/net>
+#include <Poco/Net/HTTPCookie.h>
 #include <Vector>
 
-
+using namespace std;
 class CookieJar{
 public:
-	CookJar();
-	Vector<HTTPCookie> jar;
-	int addCookie(Poco::HTTPCookie cookie);
+	CookieJar();
+	vector<Poco::Net::HTTPCookie> jar;
+	int addCookie(Poco::Net::HTTPCookie cookie);
 	int sendCookies();
 	int removeExpiredCookies();
 private: 

@@ -18,5 +18,6 @@ public:
 private:
 	void addHeadersToRequest(Poco::Net::HTTPRequest &request, map<string, string> &headers);
 	string httpCall(string call, string path, string &data, map<string, string> &headers);
+	bool hasCoookie();
 };
 

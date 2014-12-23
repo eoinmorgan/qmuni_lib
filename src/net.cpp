@@ -101,4 +101,7 @@ void Net::addHeadersToRequest(Poco::Net::HTTPRequest &request, map<string, strin
 		request.set(it->first, it->second);
 	}
 }
+void Net::getCookie(){
+
+}
 
