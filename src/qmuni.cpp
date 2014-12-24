@@ -18,7 +18,7 @@ int debugNet() {
 	string uri = "http://bsecure/api/v0/session";
 	string data = "{\"email\":\"x@src.bz\",\"code\":\"1\"}";
 
-	cout << "url: " << url << endl;
+	cout << "url: " << uri << endl;
 
 	jsonHeader.insert(make_pair<string, string>("Content-Type", "application/json"));
 	jsonHeader.insert(make_pair<string, string>("User-Agent", "Qmuni Client Library v1"));
@@ -55,7 +55,7 @@ void debugSessionModel(){
 }
 
 int main(int argc, char **argv) {
-	debugNet();
+	debugSessionModel();
 
 	return 0;	
 }

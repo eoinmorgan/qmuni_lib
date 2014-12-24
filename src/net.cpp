@@ -12,6 +12,7 @@
 
 #include "net.h"
 
+
 #define POCO_POST  Poco::Net::HTTPRequest::HTTP_POST
 #define POCO_PUT  Poco::Net::HTTPRequest::HTTP_PUT
 #define POCO_GET  Poco::Net::HTTPRequest::HTTP_GET
@@ -22,26 +23,29 @@
 using namespace std;
 
 // sudo tcpdump -i lo0 port 80 and dst 127.0.0.1
+Net::Net(){
+	CookieJar m_jar;
+}
 
-int Net::httpGet(const string path, map<string, string> *headers, string *responseData) const {
+int Net::httpGet(const string path, map<string, string> *headers, string *responseData)  {
 	return httpCall(POCO_GET, path, headers, NULL, responseData);
 }
 
-int Net::httpDelete(const string path, map<string, string> *headers, string *responseData) const {
+int Net::httpDelete(const string path, map<string, string> *headers, string *responseData)  {
 	return httpCall(POCO_DELETE, path, headers, NULL, responseData);
 }
 
 // TODO assert that data is not empty
-int Net::httpPost(const string path, map<string, string> *headers, const string &requestData, string *responseData) const {
+int Net::httpPost(const string path, map<string, string> *headers, const string &requestData, string *responseData)  {
 	return httpCall(POCO_POST, path, headers, requestData, responseData);
 }
 
 // TODO assert that data is not empty
-int Net::httpPut(const string path, map<string, string> *headers, const string &requestData, string *responseData) const {
+int Net::httpPut(const string path, map<string, string> *headers, const string &requestData, string *responseData)  {
 	return httpCall(POCO_PUT, path, headers, requestData, responseData);
 }
 
-int Net::httpCall(const string &call, const string &path, map<string, string> *headers, const string &requestData, string *responseData) const {
+int Net::httpCall(const string &call, const string &path, map<string, string> *headers, const string &requestData, string *responseData)  {
 	int result = 0;
 
 	try {
@@ -76,6 +80,12 @@ int Net::httpCall(const string &call, const string &path, map<string, string> *h
 
 		// collect the response from the server
 		Poco::Net::HTTPResponse res;
+		vector<Poco::Net::HTTPCookie> cookies;
+		res.getCookies(cookies);
+		for(int it = 0; it!=cookies.size();++it){
+			m_jar.addCookie(cookies[it]);
+		}
+
 		istream &rs = session.receiveResponse(res);
 		Poco::StreamCopier::copyToString(rs, *responseData);
 

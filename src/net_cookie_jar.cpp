@@ -9,7 +9,7 @@ CookieJar::CookieJar(){
 
 }
 
-void CookieJar::addCookie(Poco::Net::HTTPCookie cookie){
+void CookieJar::addCookie(const Poco::Net::HTTPCookie cookie){
 
 	map<string , Poco::Net::HTTPCookie>::iterator jar_it;
 	string name = cookie.getName();	
