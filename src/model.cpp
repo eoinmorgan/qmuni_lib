@@ -10,14 +10,11 @@ using namespace std;
 Model::Model() {
  cout << "bad model" << endl;
 	m_token = "";
-	Net m_net;
-	
 }
 
 Model::Model(string uri) {
 	m_uri = uri;
 	cout << "got here " << m_uri << endl;
-	Net m_net;
 	m_token = "";
 	
 }
@@ -31,28 +28,28 @@ Model::Model(string uri, string tokenIn) {
 
 
 void Model::debugNet() {
-	Net *net = new Net();
-	map<string, string> noHeaders;
-	map<string, string> jsonHeader;
-	string uri = "http://mocksvc.mulesoft.com/mocks/487209f4-65da-4576-acbd-c89231ea860f/book";
-	string data = "{\"email\":\"x@src.bz\",\"code\":\"1\"}";
-
-	jsonHeader.insert(make_pair<string, string>("Content-Type", "application/json"));
-	jsonHeader.insert(make_pair<string, string>("User-Agent", "Qmuni Client Library v1"));
-	noHeaders.insert(make_pair<string, string>("User-Agent", "Qmuni Client Library v1"));
-	
-	cout << "post result: ";
-	cout << net->httpPost(uri, data, jsonHeader) << endl;
-	cout << "get result: ";
-	cout << net->httpGet(uri, noHeaders) << endl;
-	cout << "put result: ";
-	cout << net->httpPut(uri, data, jsonHeader) << endl;
-	cout << "delete result: ";
-	cout << net->httpDelete(uri, noHeaders) << endl;
-	
-	
-	delete net;
-	net = NULL;
+// 	Net *net = new Net();
+// 	map<string, string> noHeaders;
+// 	map<string, string> jsonHeader;
+// 	string uri = "http://mocksvc.mulesoft.com/mocks/487209f4-65da-4576-acbd-c89231ea860f/book";
+// 	string data = "{\"email\":\"x@src.bz\",\"code\":\"1\"}";
+// 
+// 	jsonHeader.insert(make_pair<string, string>("Content-Type", "application/json"));
+// 	jsonHeader.insert(make_pair<string, string>("User-Agent", "Qmuni Client Library v1"));
+// 	noHeaders.insert(make_pair<string, string>("User-Agent", "Qmuni Client Library v1"));
+// 	
+// 	cout << "post result: ";
+// 	cout << net->httpPost(uri, data, jsonHeader) << endl;
+// 	cout << "get result: ";
+// 	cout << net->httpGet(uri, noHeaders) << endl;
+// 	cout << "put result: ";
+// 	cout << net->httpPut(uri, data, jsonHeader) << endl;
+// 	cout << "delete result: ";
+// 	cout << net->httpDelete(uri, noHeaders) << endl;
+// 	
+// 	
+// 	delete net;
+// 	net = NULL;
 	
 }
 	bool Model::Null() { 

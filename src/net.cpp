@@ -23,45 +23,29 @@ using namespace std;
 
 // sudo tcpdump -i lo0 port 80 and dst 127.0.0.1
 
-
-
-Net::Net(){
-	
-	
-
-		
-		
+int Net::httpGet(const string path, map<string, string> *headers, string *responseData) const {
+	return httpCall(POCO_GET, path, headers, NULL, responseData);
 }
 
-istream& Net::httpGet(string path, map<string, string> &headers) {
-	string empty;
-	return httpCall(POCO_GET, path, empty, headers);
-}
-
-istream& Net::httpDelete(string path, map<string, string> &headers) {
-	string empty;
-	return httpCall(POCO_DELETE, path, empty, headers);
+int Net::httpDelete(const string path, map<string, string> *headers, string *responseData) const {
+	return httpCall(POCO_DELETE, path, headers, NULL, responseData);
 }
 
 // TODO assert that data is not empty
-istream& Net::httpPost(string path, string &data, map<string, string> &headers) {
-	return httpCall(POCO_POST, path, data, headers);
+int Net::httpPost(const string path, map<string, string> *headers, const string &requestData, string *responseData) const {
+	return httpCall(POCO_POST, path, headers, requestData, responseData);
 }
-
 
 // TODO assert that data is not empty
-istream& Net::httpPut(string path, string &data, map<string, string> &headers) {
-	return httpCall(POCO_PUT, path, data, headers);
+int Net::httpPut(const string path, map<string, string> *headers, const string &requestData, string *responseData) const {
+	return httpCall(POCO_PUT, path, headers, requestData, responseData);
 }
 
-istream& Net::httpCall(string call, string path, string &data, map<string, string> &headers) {
-	string result = "";
-	bool hasData = false;
-	Poco::URI uri(path);
-	streambuf *sb;
-	istream& rs(istream &b);
+int Net::httpCall(const string &call, const string &path, map<string, string> *headers, const string &requestData, string *responseData) const {
+	int result = 0;
 
 	try {
+		Poco::URI uri(path);
 		Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
 		Poco::Net::HTTPRequest req(call, uri.getPathAndQuery(), Poco::Net::HTTPMessage::HTTP_1_1);
  
@@ -69,15 +53,17 @@ istream& Net::httpCall(string call, string path, string &data, map<string, strin
 		//req.setHost("bsecure");
 
 		// add or replace headers for this request
-		addHeadersToRequest(req, headers);
+		addHeadersToRequest(&req, headers);
 
-		if (!data.empty()) {
+		bool hasData = false;
+
+		if (!requestData.empty()) {
 			hasData = true;
 		}
 
 		// update length of content if data was given
 		if (hasData) {
-			req.setContentLength(data.length());
+			req.setContentLength(requestData.length());
 		}
 
 		// send the request to the server
@@ -85,32 +71,25 @@ istream& Net::httpCall(string call, string path, string &data, map<string, strin
 
 		// send the data to the server in the body of the request
 		if (hasData) {
-			out << data;
+			out << requestData;
 		}
 
 		// collect the response from the server
 		Poco::Net::HTTPResponse res;
-		 istream &rs = session.receiveResponse(res);
+		istream &rs = session.receiveResponse(res);
+		Poco::StreamCopier::copyToString(rs, *responseData);
 
-		return &rs;
-		// TODO don't do this
-		// convert the stream response to a string
-		
-
-		
+		result = res.getStatus();
 	} catch (Poco::Exception &ex) {
 		cerr << ex.displayText() << endl;
 	}
-	cout << "end of call: " << result << endl;
-	return rs;
- }
 
-void Net::addHeadersToRequest(Poco::Net::HTTPRequest &request, map<string, string> &headers) {
-	for (map<string, string>::iterator it = headers.begin(); it != headers.end(); ++it) {
-		request.set(it->first, it->second);
+	return result;
+}
+
+void Net::addHeadersToRequest(Poco::Net::HTTPRequest *request, map<string, string> *headers) const {
+	for (map<string, string>::iterator it = headers->begin(); it != headers->end(); ++it) {
+		// for the current header, set the key and value of that header in the request
+		request->set(it->first, it->second);
 	}
 }
-void Net::getCookie(){
-
-}
-

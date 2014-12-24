@@ -1,4 +1,3 @@
-
 #include <string>
 #include <map>
 
@@ -10,21 +9,11 @@ using namespace std;
 
 class Net {
 public:
-	int test;
-	Net();
-	istream& httpPost(string path, string &data, map<string, string> &headers);
-	istream& httpPut(string uri, string &data, map<string, string> &headers);
-	istream& httpGet(string uri, map<string, string> &headers);
-	istream& httpDelete(string uri, map<string, string> &headers);
-	
-	
-
-	void getCookie();
+	int httpGet(const string path, map<string, string> *headers, string *responseData) const;
+	int httpDelete(const string path, map<string, string> *headers, string *responseData) const;
+	int httpPost(const string path, map<string, string> *headers, const string &requestData, string *responseData) const;
+	int httpPut(const string path, map<string, string> *headers, const string &requestData, string *responseData) const;
 private:
-	void addHeadersToRequest(Poco::Net::HTTPRequest &request, map<string, string> &headers);
-	istream& httpCall(string call, string path, string &data, map<string, string> &headers);
-
-	bool hasCoookie();
-	
+	int httpCall(const string &call, const string &path, map<string, string> *headers, const string &requestData, string *responseData) const;
+	void addHeadersToRequest(Poco::Net::HTTPRequest *request, map<string, string> *headers) const;
 };
-
