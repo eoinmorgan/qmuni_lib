@@ -11,11 +11,13 @@ public:
 	SessionHandler();
 	SessionHandler(string uri);
 	SessionHandler(string uriIn, string token, Model session);
-	SessionModel m_session_model;
-	string login(string userName, string code);
+	~SessionHandler();
 
+	string login(string userName, string code);
 	string getUri();
 	int setUri(string uri);
+
+	SessionModel *m_session_model;
 private:
 	string m_token;
 	string m_uri;
