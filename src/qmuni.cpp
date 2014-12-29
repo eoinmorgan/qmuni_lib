@@ -46,12 +46,14 @@ int debugNet() {
 void debugSessionModel(){
 
 	SessionHandler *session_handler = new SessionHandler("http://mocksvc.mulesoft.com/mocks/487209f4-65da-4576-acbd-c89231ea860f/book");
+	//cout << "from main " << session_handler->m_session_model.m_uri << endl;
 	string data = "{\"email\":\"x@src.bz\",\"code\":\"1\"}";
 
 	cout << session_handler->login("x@src.bz", "1") << endl;
 	
 	delete session_handler;
 	session_handler = NULL;
+	
 }
 
 int main(int argc, char **argv) {

@@ -1,15 +1,14 @@
 #include <string>
 
 #include "session_model.h"
+SessionModel::SessionModel() : Model(){
 
-SessionModel::SessionModel():Model(){
-
-
-
+cout <<"wrong model created" << endl;
 }
-SessionModel::SessionModel(string uri):Model(){
 
-cout << "this happened: "<< uri << endl;
+SessionModel::SessionModel(string uri) : Model(uri){
+	m_uri = uri;
+	cout << "this happened: "<< m_uri << endl;
 
 }
 string SessionModel::login(string userName, string code){
@@ -26,7 +25,12 @@ string SessionModel::login(string userName, string code){
 
 	Net *net = new Net();
 	result = net->httpPost(m_uri, &noHeaders, input, output);
+	result = net->httpPut(m_uri, &noHeaders, input, output);
 
+	cout << net->printf();
+
+	delete net;
+	net = NULL;
 	// BUG THIS LEAKS MEMORY LIKE A BROKEN FIREHYDRANT LEAKS WATER
 	return *output;
 }

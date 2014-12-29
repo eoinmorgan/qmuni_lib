@@ -13,7 +13,7 @@ protected:
 	string m_userName;
 	string m_emailAddres;
 	string m_token;
-	string m_uri;
+	
 	Net m_net;
 	bool m_login_status;
 	void debugNet();
@@ -22,7 +22,7 @@ public:
 	Model(string uri);
 	Model(string uri, string token);
 	
-
+string m_uri;
 	string get_user_name() { return m_userName; };
 	string get_email_address() { return m_emailAddres; };
 	string get_token() { return m_token; };

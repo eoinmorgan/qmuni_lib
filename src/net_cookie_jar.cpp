@@ -5,7 +5,7 @@ using namespace std;
 
 CookieJar::CookieJar(){
 
-	map<string, Poco::Net::HTTPCookie> m_jar;
+	 map<string, Poco::Net::HTTPCookie> m_jar;
 
 }
 
@@ -28,4 +28,13 @@ int CookieJar::sendCookies(){
 int CookieJar::removeExpiredCookies(){
 	int cookiesRemoved = 0;
 	return cookiesRemoved;
+}
+string CookieJar::printf(){
+	string result="";
+	for(map<string, Poco::Net::HTTPCookie>::iterator it = m_jar.begin(); it != m_jar.end(); ++it) {
+
+		result = result + it->first;
+	}
+
+	return result;
 }

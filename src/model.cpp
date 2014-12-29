@@ -7,9 +7,8 @@
 
 using namespace std;
 
-Model::Model() {
- cout << "bad model" << endl;
-	m_token = "";
+Model::Model(){
+	cout << "bad"<<endl;
 }
 
 Model::Model(string uri) {
