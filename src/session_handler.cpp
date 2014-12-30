@@ -34,8 +34,8 @@ SessionHandler::~SessionHandler() {
 
 
 int SessionHandler::login(string userName, string code) {
-	 this->m_session_model.m_uri = m_uri;
-	return  m_session_model.login(userName, code);
+	 this->m_session_model->m_uri = m_uri;
+	return  m_session_model->login(userName, code);
 	
 }
 
