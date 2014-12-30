@@ -8,7 +8,7 @@ SessionModel::SessionModel() : Model(){
 
 SessionModel::SessionModel(string uri) : Model(uri){
 	m_uri = uri;
-	
+
 
 }
 int SessionModel::login(string userName, string code){
@@ -25,12 +25,14 @@ int SessionModel::login(string userName, string code){
 
 	Net *net = new Net();
 	result = net->httpPost(m_uri, &noHeaders, input, output);
+
 	
 
 	//cout << net->printf();
 	delete output;
 	output = NULL;
 	
+
 	delete net;
 	net = NULL;
 	// BUG THIS LEAKS MEMORY LIKE A BROKEN FIREHYDRANT LEAKS WATER

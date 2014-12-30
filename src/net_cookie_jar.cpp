@@ -29,6 +29,7 @@ int CookieJar::removeExpiredCookies(){
 	int cookiesRemoved = 0;
 	return cookiesRemoved;
 }
+
 /*
 vector<Poco::Net::HTTPCookie> Net::getRequestCookies(const &Poco::Net::HTTPRequest request)
 {
@@ -39,6 +40,7 @@ vector<Poco::Net::HTTPCookie> Net::getRequestCookies(const &Poco::Net::HTTPReque
 	return cookies;
 }
 */
+
 string CookieJar::printf(){
 	string result="";
 	for(map<string, Poco::Net::HTTPCookie>::iterator it = m_jar.begin(); it != m_jar.end(); ++it) {
