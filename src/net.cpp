@@ -103,3 +103,13 @@ void Net::addHeadersToRequest(Poco::Net::HTTPRequest *request, map<string, strin
 		request->set(it->first, it->second);
 	}
 }
+/*
+Vector<Poco::Net::HTTPCookie> Net::getRequestCookies(const &Poco::Net::HTTPRequest request)
+{
+
+	return m_jar.getRequestCookies(request);
+}
+*/
+string Net::printf(){
+	return m_jar.printf();
+}

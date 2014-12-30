@@ -8,6 +8,6 @@ class SessionModel : public Model{
 public:
 	SessionModel();
 	SessionModel(string uri);
-	string login(string userName, string code);
+	int login(string userName, string code);
 
 };

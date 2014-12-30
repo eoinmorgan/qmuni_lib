@@ -51,9 +51,9 @@ istream& httpPost(){
 		}
 	} catch (Exception &ex) {
 		cerr << ex.displayText() << endl;
-		return rs;
+		return outputString;
 	}
-	return rs;
+	return outputString;
 	
 }
 

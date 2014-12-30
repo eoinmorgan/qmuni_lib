@@ -12,7 +12,7 @@ public:
 	SessionHandler(string uri);
 	SessionHandler(string uriIn, string token, Model session);
 	SessionModel m_session_model;
-	string login(string userName, string code);
+	int login(string userName, string code);
 
 	string getUri();
 	int setUri(string uri);

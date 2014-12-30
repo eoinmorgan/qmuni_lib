@@ -7,14 +7,12 @@
 
 using namespace std;
 
-Model::Model() {
- cout << "bad model" << endl;
-	m_token = "";
+Model::Model(){
+	
 }
 
 Model::Model(string uri) {
 	m_uri = uri;
-	cout << "got here " << m_uri << endl;
 	m_token = "";
 	
 }
