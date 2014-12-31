@@ -1,7 +1,8 @@
+#pragma once
 #include "rapidjson/reader.h"
 #include <iostream>
 
-#include "session_model.h"
+
 
 
 using namespace std;

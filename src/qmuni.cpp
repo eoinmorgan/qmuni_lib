@@ -67,14 +67,14 @@ void debugSessionModel(){
 }
 int login(string email, string code)
 {
-	SessionHandler *session_handler = new SessionHandler("http://bsecure/api/v0/session");
+	SessionHandler *session_handler = new SessionHandler();
 	return session_handler->login(email, code);
 
 }
 
 int main(int argc, char **argv) {
-	//login("x@src.bz", "1");
-	debugJson();
+	login("x@src.bz", "1");
+	//debugJson();
 
 	return 0;	
 }

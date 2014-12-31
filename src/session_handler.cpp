@@ -1,6 +1,8 @@
+
 #include <string>
 #include <vector>
 #include <iostream>
+#include "qmuni.h"
 
 #include "session_handler.h"
 
@@ -9,7 +11,7 @@ using namespace std;
 
 
 SessionHandler::SessionHandler() {
-	m_uri = "http://bsecure/api/v0/session";
+	m_uri = PROTOCOL+"//"+SERVER+"/"+VERSION;
 	m_session_model = new SessionModel(m_uri);
 	m_token = "";
 }

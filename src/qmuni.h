@@ -1,5 +1,5 @@
 // public header file
-
+#pragma once
 #include <string>
 #include "session_handler.h"
 

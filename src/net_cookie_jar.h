@@ -1,3 +1,4 @@
+#pragma once
 #include <Poco/Net/HTTPCookie.h>
 #include <map>
 
