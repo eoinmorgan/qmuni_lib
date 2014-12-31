@@ -1,9 +1,13 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include "model.h"
+
+
 #include "rapidjson/stringbuffer.h"
 #include "rapidjson/writer.h"
+
+#include "qmuni.h"
+#include "model.h"
 
 
 using namespace std;
@@ -11,6 +15,7 @@ using namespace std;
 Model::Model(){
     rapidjson::Document data_;
     net_ = new Net();
+    uri_ = url;
    
 }
 
@@ -32,7 +37,7 @@ Model::~Model(){
 
 
 void Model::fetchJson(const char json[]){
-
+op
     
     data_.Parse(json);
     debugJson();

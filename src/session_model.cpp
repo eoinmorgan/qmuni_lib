@@ -3,7 +3,7 @@
 
 #include "session_model.h"
 SessionModel::SessionModel() : Model(){
-
+uri_ = url + "/session/";
 
 }
 

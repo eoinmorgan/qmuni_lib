@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+
 #include "rapidjson/document.h"
 
 #include "net.h"
@@ -42,7 +43,7 @@ string m_uri;
 	int set_token(string input_token);
 	int set_login(bool input_login_status);
 private:
-	
+	string uri_;
 	
 	
 
