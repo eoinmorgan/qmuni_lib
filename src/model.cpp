@@ -10,6 +10,8 @@ using namespace std;
 
 Model::Model(){
     rapidjson::Document data_;
+    net_ = new Net();
+   
 }
 
 Model::Model(string uri) {
@@ -23,15 +25,20 @@ Model::Model(string uri, string tokenIn) {
 	m_token = tokenIn;
 	
 }
+Model::~Model(){
+     delete net_;
+    net_ = NULL;
+}
 
 
-void Model::decodeJson(const char json[]){
+void Model::fetchJson(const char json[]){
 
     
     data_.Parse(json);
+    debugJson();
 
 }
-string Model::encodeJson(){
+string Model::storeJson(){
     rapidjson::StringBuffer buffer;
     rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
     data_.Accept(writer);
@@ -39,8 +46,19 @@ string Model::encodeJson(){
 }
 
 void Model::debugJson(){
-    rapidjson::Value &test = data_["hello"];
-    string t = test.GetString();
+ 
+    rapidjson::Value::MemberIterator it  = getJsonIterator("desc");
+    string t = it->value.GetString();
     cout << "resutl: " << t << endl;
-    cout << encodeJson() << endl;
+    cout << storeJson() << endl;
 }
+
+rapidjson::Value::MemberIterator Model::getJsonIterator(string name){
+    char *target = (char*)name.c_str();
+    rapidjson::Value::MemberIterator it = data_.FindMember(target);
+    
+    return it;
+   
+}
+
+

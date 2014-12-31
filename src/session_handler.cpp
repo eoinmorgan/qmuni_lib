@@ -49,9 +49,5 @@ int SessionHandler::setUri(string uri) {
 	
 	return 0;
 }
-void SessionHandler::debugJson(){
-	const char json[] = " { \"hello\" : \"world\", \"t\" : true , \"f\" : false, \"n\": null, \"i\":123, \"pi\": 3.1416} ";
-	m_session_model->decodeJson(json);
-	m_session_model->debugJson();
-}
+
 

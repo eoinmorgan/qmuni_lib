@@ -45,10 +45,6 @@ int debugNet() {
 
 	return result;
 }
-void debugJson(){
-	SessionHandler *session_handler = new SessionHandler();
-	session_handler->debugJson();
-}
 
 void debugSessionModel(){
 
@@ -67,7 +63,7 @@ void debugSessionModel(){
 }
 int login(string email, string code)
 {
-	SessionHandler *session_handler = new SessionHandler();
+	SessionHandler *session_handler = new SessionHandler("http://mocksvc.mulesoft.com/mocks/487209f4-65da-4576-acbd-c89231ea860f/book");
 	return session_handler->login(email, code);
 
 }
