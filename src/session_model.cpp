@@ -38,3 +38,4 @@ int SessionModel::login(string userName, string code){
 	// BUG THIS LEAKS MEMORY LIKE A BROKEN FIREHYDRANT LEAKS WATER
 	return result;
 }
+

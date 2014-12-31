@@ -3,7 +3,10 @@
 #include <string>
 #include <unordered_map>
 
+
+
 #include "qmuni.h"
+
 
 using namespace std;
 
@@ -42,6 +45,10 @@ int debugNet() {
 
 	return result;
 }
+void debugJson(){
+	SessionHandler *session_handler = new SessionHandler();
+	session_handler->debugJson();
+}
 
 void debugSessionModel(){
 
@@ -66,7 +73,8 @@ int login(string email, string code)
 }
 
 int main(int argc, char **argv) {
-	
+	//login("x@src.bz", "1");
+	debugJson();
 
 	return 0;	
 }

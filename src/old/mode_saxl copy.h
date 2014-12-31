@@ -2,7 +2,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
-#include "rapidjson/document.h"
+#include "rapidjson/reader.h"
 
 #include "net.h"
 
@@ -14,7 +14,6 @@ protected:
 	string m_emailAddres;
 	string m_token;
 	
-	rapidjson::Document data_;
 	Net m_net;
 	bool m_login_status;
 	void debugNet();
@@ -33,10 +32,21 @@ string m_uri;
 	int set_email_address(string input_addresss);
 	int set_token(string input_token);
 	int set_login(bool input_login_status);
-	void decodeJson(const char json[]);
-	void debugJson();
-	string encodeJson();
 
+	bool Null();
+    bool Bool(bool b);
+    bool Int(int i);
+    bool Uint(unsigned u);
+    bool Int64(int64_t i);
+    bool Uint64(uint64_t u);
+    bool Double(double d);
+    bool String(const char* str, rapidjson::SizeType length, bool copy);
+    bool StartObject();
+    bool Key(const char* str, rapidjson::SizeType length, bool copy);
+    bool EndObject(rapidjson::SizeType memberCount);
+    bool StartArray();
+    bool EndArray(rapidjson::SizeType elementCount);
+    void decodeJson(const char json[]);
 };
 
 

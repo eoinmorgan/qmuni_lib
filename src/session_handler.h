@@ -21,6 +21,8 @@ public:
 	int setUri(string uri);
 
 	SessionModel *m_session_model;
+
+	void debugJson();
 private:
 	string m_token;
 	string m_uri;

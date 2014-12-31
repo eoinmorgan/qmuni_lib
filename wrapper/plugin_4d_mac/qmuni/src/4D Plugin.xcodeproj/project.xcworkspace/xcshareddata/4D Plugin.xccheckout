@@ -22,9 +22,9 @@
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>7448E718372DB7A4B0D01E27524ED3F8AE51A902</key>
-		<string>../../../../../..vendor/rapidjson/</string>
+		<string>../../../../../..vendor/rapidjson</string>
 		<key>9FDFF8CEB5E5AE6CC655403E48A0D4DBB47BFEB1</key>
-		<string>../../../../../..vendor/rapidjson/thirdparty/gtest/</string>
+		<string>../../../../../..vendor/rapidjson/thirdparty/gtest</string>
 		<key>DD5B4A90CE2C3C7511FD94F8C048ADD0018A9AE1</key>
 		<string>../../../../../..</string>
 	</dict>

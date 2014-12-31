@@ -9,5 +9,5 @@ public:
 	SessionModel();
 	SessionModel(string uri);
 	int login(string userName, string code);
-
+	
 };
