@@ -16,6 +16,7 @@ public:
 
 	~SessionHandler();
 
+	void debugJson(string json);
 
 	int login(string userName, string code);
 	string getUri();

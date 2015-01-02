@@ -17,4 +17,6 @@ const string PROTOCOL = "http";
 const string SERVER = "bsecure";
 const string VERSION = "0";
 
+
+
 int login(string email, string code);

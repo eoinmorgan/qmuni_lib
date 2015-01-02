@@ -15,6 +15,7 @@ protected:
 	string m_userName;
 	string m_emailAddres;
 	string m_token;
+	string uri_;
 
 	
 	rapidjson::Document data_;
@@ -24,7 +25,7 @@ protected:
 	void fetchJson(const char json[]);
 	string storeJson();
 	rapidjson::Value::MemberIterator getJsonIterator(string name);
-	void debugJson();
+	
 
 public:
 	Model();
@@ -42,8 +43,9 @@ string m_uri;
 	int set_email_address(string input_addresss);
 	int set_token(string input_token);
 	int set_login(bool input_login_status);
+	void debugJson(string json);
 private:
-	string uri_;
+	
 	
 	
 

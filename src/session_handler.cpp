@@ -2,8 +2,8 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include "qmuni.h"
 
+#include "qmuni.h"
 #include "session_handler.h"
 
 
@@ -48,6 +48,10 @@ int SessionHandler::setUri(string uri) {
 	m_uri = uri;
 	
 	return 0;
+}
+void SessionHandler::debugJson(string json){
+m_session_model->debugJson(json);
+
 }
 
 

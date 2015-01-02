@@ -14,19 +14,22 @@ using namespace std;
 
 Model::Model(){
     rapidjson::Document data_;
+    extern string url;
     net_ = new Net();
     uri_ = url;
    
 }
 
 Model::Model(string uri) {
-	m_uri = uri;
+	extern string url;
+    m_uri = uri;
 	m_token = "";
 	
 }
 
 Model::Model(string uri, string tokenIn) {
-	m_uri = uri;
+	extern string url;
+    m_uri = uri;
 	m_token = tokenIn;
 	
 }
@@ -37,10 +40,10 @@ Model::~Model(){
 
 
 void Model::fetchJson(const char json[]){
-op
+
     
     data_.Parse(json);
-    debugJson();
+    cout << "fetched Json" << endl;
 
 }
 string Model::storeJson(){
@@ -50,10 +53,23 @@ string Model::storeJson(){
     return buffer.GetString();
 }
 
-void Model::debugJson(){
- 
-    rapidjson::Value::MemberIterator it  = getJsonIterator("desc");
-    string t = it->value.GetString();
+void Model::debugJson(string json){
+    cout << "starting debugJson" << endl; 
+    char *target = (char*)json.c_str();
+    fetchJson(target);
+    //rapidjson::Value::MemberIterator it  = getJsonIterator("created");
+    for (int i = 0; i < data_.Size(); ++i){
+        
+        const rapidjson::Value &message = data_["last_message"];
+        const rapidjson::Value &profile = message["profile"];
+    }
+   
+
+    string t = "fail";
+    if(data_["first_name"].IsString()){
+          t = data_["first_name"].GetString();
+    }
+   
     cout << "resutl: " << t << endl;
     cout << storeJson() << endl;
 }
@@ -61,6 +77,9 @@ void Model::debugJson(){
 rapidjson::Value::MemberIterator Model::getJsonIterator(string name){
     char *target = (char*)name.c_str();
     rapidjson::Value::MemberIterator it = data_.FindMember(target);
+    if(it == data_.MemberEnd()){
+        cout << "cant find Member: " << name << endl;
+    }
     
     return it;
    

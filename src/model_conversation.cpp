@@ -2,5 +2,6 @@
 #include "qmuni.h"
 
 ConversationModel::ConversationModel(){
+	extern string url;
 	uri_ = url + "/conversation/";
 }

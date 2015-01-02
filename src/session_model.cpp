@@ -2,17 +2,17 @@
 #include <string>
 
 #include "session_model.h"
-SessionModel::SessionModel() : Model(){
-uri_ = url + "/session/";
 
+SessionModel::SessionModel() : Model() {
+	extern string url;
+	uri_ = url + "/session/";
 }
 
-SessionModel::SessionModel(string uri) : Model(uri){
+SessionModel::SessionModel(string uri) : Model(uri) {
 	m_uri = uri;
-
-
 }
-int SessionModel::login(string userName, string code){
+
+int SessionModel::login(string userName, string code) {
 	//debugNet();
 	string input = "{\"email\":\""+userName+"\",\"code\":\""+code+"\"}";
 	//cout << "data: " << input << endl; 
@@ -23,25 +23,17 @@ int SessionModel::login(string userName, string code){
 
 	int status_code = 0;
 	string *output = new string();
-	
-
-	
 	status_code = net_->httpPost(m_uri, &noHeaders, input, output);
-	if(status_code == 200 || status_code == 201)
-	{	
-		char *json = (char*)output->c_str();
+
+	if (status_code == 200 || status_code == 201) {
+		char *json = (char *)output->c_str();
 		fetchJson(json);
-		
 	}
-	
-	
 
 	//cout << net->printf();
 	delete output;
 	output = NULL;
-	
 
 	// BUG THIS LEAKS MEMORY LIKE A BROKEN FIREHYDRANT LEAKS WATER
 	return status_code;
 }
-
