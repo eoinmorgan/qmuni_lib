@@ -2,9 +2,7 @@
 
 The **Qmuni Client Library** was developed by Qmuni, LLC as a companion project to the Qmuni API. It was created for developers to help them simplify their integration with Qmuni API into their projects. It consists of a core client library and specific platform wrappers.
 
-**
-*Please review our [disclaimer](#disclaimer) before using this software.*
-**
+**Please review our [disclaimer](#disclaimer) before using this software.**
 
 ## Table of Contents ##
 1. [Changes](#changes)
@@ -66,7 +64,7 @@ The following libraries must be available in order to link programs that use the
 * [POCO][] for network connectivity
 * [RapidJSON][] for JSON processing
 
-	***Note:** RapidJSON is included as a Git sub-module.*
+	*Note: RapidJSON is included as a Git sub-module.*
 
 ### Installing Dependencies ###
 
