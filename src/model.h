@@ -22,7 +22,7 @@ protected:
 	Net *net_;
 	bool m_login_status;
 	void debugNet();
-	void fetchJson(const char json[]);
+	void fetchJson(const string &json);
 	string storeJson();
 	rapidjson::Value::MemberIterator getJsonIterator(string name);
 	

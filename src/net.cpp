@@ -24,7 +24,7 @@ using namespace std;
 
 // sudo tcpdump -i lo0 port 80 and dst 127.0.0.1
 Net::Net(){
-	CookieJar m_jar;
+	m_jar = new CookieJar();
 }
 
 int Net::httpGet(const string path, map<string, string> *headers, string *responseData)  {
@@ -54,11 +54,18 @@ int Net::httpCall(const string &call, const string &path, map<string, string> *h
 		Poco::Net::HTTPRequest req(call, uri.getPathAndQuery(), Poco::Net::HTTPMessage::HTTP_1_1);
  
 		//req.set("User-Agent","BSecure Client 1.0");
-		//req.setHost("bsecure");
 
-		// add or replace headers for this request
+		// DEBUG:
+		// req.setHost("bsecure");
+		// req.setHost("127.0.0.1");
+
+		// add or replace additional headers for this request
 		addHeadersToRequest(&req, headers);
-
+		
+		if(!m_jar->empty()){
+			req.setCookies(m_jar->sendCookies());
+		}
+		
 		bool hasData = false;
 
 		if (!requestData.empty()) {
@@ -69,6 +76,12 @@ int Net::httpCall(const string &call, const string &path, map<string, string> *h
 		if (hasData) {
 			req.setContentLength(requestData.length());
 		}
+
+		// DEBUG:
+		// string myHost;
+		// myHost = session.getHost();
+		//req.setHost(uri.getHost());
+		// cerr << "host with the most: " << myHost << endl;
 
 		// send the request to the server
 		ostream &out = session.sendRequest(req);
@@ -83,7 +96,7 @@ int Net::httpCall(const string &call, const string &path, map<string, string> *h
 		vector<Poco::Net::HTTPCookie> cookies;
 		res.getCookies(cookies);
 		for(int it = 0; it!=cookies.size();++it){
-			m_jar.addCookie(cookies[it]);
+			m_jar->addCookie(cookies[it]);
 		}
 
 		istream &rs = session.receiveResponse(res);
@@ -92,6 +105,7 @@ int Net::httpCall(const string &call, const string &path, map<string, string> *h
 		result = res.getStatus();
 	} catch (Poco::Exception &ex) {
 		cerr << ex.displayText() << endl;
+		
 	}
 
 	return result;
@@ -101,6 +115,7 @@ void Net::addHeadersToRequest(Poco::Net::HTTPRequest *request, map<string, strin
 	for (map<string, string>::iterator it = headers->begin(); it != headers->end(); ++it) {
 		// for the current header, set the key and value of that header in the request
 		request->set(it->first, it->second);
+		cout << it->first << ": " << it->second << endl;
 	}
 }
 
@@ -113,5 +128,5 @@ Vector<Poco::Net::HTTPCookie> Net::getRequestCookies(const &Poco::Net::HTTPReque
 */
 
 string Net::printf(){
-	return m_jar.printf();
+	return m_jar->printf();
 }

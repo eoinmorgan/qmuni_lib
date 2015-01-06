@@ -12,16 +12,18 @@
 
 using namespace std;
 
-Model::Model(){
+Model::Model() {
     rapidjson::Document data_;
     extern string url;
     net_ = new Net();
     uri_ = url;
+   cout << "net made according to model" << endl;
    
 }
 
 Model::Model(string uri) {
 	extern string url;
+    net_ = new Net();
     m_uri = uri;
 	m_token = "";
 	
@@ -29,20 +31,21 @@ Model::Model(string uri) {
 
 Model::Model(string uri, string tokenIn) {
 	extern string url;
+    net_ = new Net();
     m_uri = uri;
 	m_token = tokenIn;
 	
 }
-Model::~Model(){
+Model::~Model() {
      delete net_;
     net_ = NULL;
 }
 
 
-void Model::fetchJson(const char json[]){
+void Model::fetchJson(const string &json){
 
-    
-    data_.Parse(json);
+    char *target = (char*)json.c_str();
+    data_.Parse(target);
     cout << "fetched Json" << endl;
 
 }
@@ -55,24 +58,21 @@ string Model::storeJson(){
 
 void Model::debugJson(string json){
     cout << "starting debugJson" << endl; 
-    char *target = (char*)json.c_str();
-    fetchJson(target);
+    
+    fetchJson(json);
     //rapidjson::Value::MemberIterator it  = getJsonIterator("created");
     for (int i = 0; i < data_.Size(); ++i){
         
-        const rapidjson::Value &message = data_["last_message"];
-        const rapidjson::Value &profile = message["profile"];
+      
+        const rapidjson::Value &convo = data_[i];
+        const rapidjson::Value &message = convo["last_message"];
+        cout << message["message"].GetInt() << endl;
     }
    
 
-    string t = "fail";
-    if(data_["first_name"].IsString()){
-          t = data_["first_name"].GetString();
-    }
-   
-    cout << "resutl: " << t << endl;
-    cout << storeJson() << endl;
 }
+
+   
 
 rapidjson::Value::MemberIterator Model::getJsonIterator(string name){
     char *target = (char*)name.c_str();

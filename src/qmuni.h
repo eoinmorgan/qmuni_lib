@@ -16,6 +16,7 @@ const string VERSION = "0";
 const string PROTOCOL = "http";
 const string SERVER = "bsecure";
 const string VERSION = "0";
+const string QAPI_BASE_URI = PROTOCOL+"://"+SERVER+"/api/v"+VERSION;
 
 
 

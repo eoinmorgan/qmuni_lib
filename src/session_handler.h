@@ -18,9 +18,10 @@ public:
 
 	void debugJson(string json);
 
-	int login(string userName, string code);
+	int login(string email, string code);
 	string getUri();
 	int setUri(string uri);
+	//void fetchConversationList();
 
 	SessionModel *m_session_model;
 

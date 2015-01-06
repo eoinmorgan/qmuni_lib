@@ -1,10 +1,22 @@
+#pragma once
+#include <string>
 
-class ConversationModel : Public Model{
+#include "model.h"
+
+class ConversationModel : public Model{
 public:
-	Conversation();
+	ConversationModel();
+	
 
 private:
+/* CONSIDER THE FOLLOWING
 
+convo id
+created date
+
+
+	
+*/
 protected:
 
 };

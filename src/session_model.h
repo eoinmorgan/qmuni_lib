@@ -9,6 +9,8 @@ class SessionModel : public Model{
 public:
 	SessionModel();
 	SessionModel(string uri);
-	int login(string userName, string code);
+	int login(string email, string code);
+	void fetchConversationList();
+
 	
 };

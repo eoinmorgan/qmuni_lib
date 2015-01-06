@@ -13,7 +13,7 @@ using namespace std;
 class Net {
 public:
 	Net();
-	CookieJar m_jar;
+	CookieJar *m_jar;
 	int httpGet(const string path, map<string, string> *headers, string *responseData) ;
 	int httpDelete(const string path, map<string, string> *headers, string *responseData) ;
 	int httpPost(const string path, map<string, string> *headers, const string &requestData, string *responseData) ;

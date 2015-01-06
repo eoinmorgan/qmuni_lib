@@ -46,9 +46,7 @@ int debugNet() {
 	return result;
 }
 
-void debugSessionModel(){
-
-
+void debugSessionModel() {
 	SessionHandler *session_handler = new SessionHandler("http://mocksvc.mulesoft.com/mocks/487209f4-65da-4576-acbd-c89231ea860f/book");
 
 	//cout << "from main " << session_handler->m_session_model.m_uri << endl;
@@ -58,33 +56,29 @@ void debugSessionModel(){
 	
 	delete session_handler;
 	session_handler = NULL;
-	
-
 }
-int login(string email, string code)
-{
-	SessionHandler *session_handler = new SessionHandler("http://mocksvc.mulesoft.com/mocks/487209f4-65da-4576-acbd-c89231ea860f/book");
+
+int login(const string email, const string code) {
+	SessionHandler *session_handler = new SessionHandler();
 	return session_handler->login(email, code);
-
 }
 
-void debugJson(){
-
-	string json = "[{\"subject\":\"testing\",\"created\":\"2014-12-30 10:23:54\",\"conversation\":1,\"last_message\"\
+void debugJson() {
+	string json = "[{\"subject\":\"testing1\",\"created\":\"2014-12-30 10:23:54\",\"conversation\":1,\"last_message\"\
 					  :{\"message\":0,\"profile\"\
 						  :{\"profile\":0,\"email\":null,\"image_path\":null,\"phone\":null,\"first_name\":null,\"last_name\":null,\"address\":null\
 						   },\
 						   \"content\":null,\"delivered\":null,\"files\":[]\
 						}\
 					},\
-					{\"subject\":\"\",\"created\":\"2014-12-31 12:56:30\",\"conversation\":2,\"last_message\":\
+					{\"subject\":\"testing2\",\"created\":\"2014-12-31 12:56:30\",\"conversation\":2,\"last_message\":\
 						{\"message\":2,\"profile\":\
 							{\"profile\":3,\"email\":\"agrandstudent@gmail.com\",\"image_path\":\"\\/file\\/3\\/fEqXsD\",\"phone\":\"\",\"first_name\":\"\",\"last_name\":\"\",\"address\":\"\"\
 							},\
 							\"content\":\"convo created\",\"delivered\":\"2014-12-31 12:56:50\",\"files\":[]\
 						}\
 					},\
-					{\"subject\":\"\",\"created\":\"2014-12-31 12:57:30\",\"conversation\":3,\"last_message\"\
+					{\"subject\":\"testing3\",\"created\":\"2014-12-31 12:57:30\",\"conversation\":3,\"last_message\"\
 						:{\"message\":0,\"profile\"\
 							:{\"profile\":0,\"email\":null,\"image_path\":null,\"phone\":null,\"first_name\":null,\"last_name\":null,\"address\":null\
 							},\
@@ -109,9 +103,13 @@ void debugJson(){
 }
 
 int main(int argc, char **argv) {
-	//login("x@src.bz", "1");
-	debugJson();
+	int result;
 
-	return 0;	
+	login("x@src.bz", "1");
+	// debugJson();
+	// debugNet();
+	result = 0;
+
+	return result;	
 }
 
