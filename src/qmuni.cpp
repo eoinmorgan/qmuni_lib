@@ -57,6 +57,15 @@ void debugSessionModel() {
 	delete session_handler;
 	session_handler = NULL;
 }
+void debugConvolist(){
+	SessionHandler *session_handler = new SessionHandler();
+	int status_code = session_handler->login("agrandstaff@cweil.com", "a");
+	cerr << "login status: " << status_code << endl;
+	//cerr << "login cookies: " << session_handler->printf();
+	if (status_code == 200){
+		session_handler->fetchConversationList();
+	}
+}
 
 int login(const string email, const string code) {
 	SessionHandler *session_handler = new SessionHandler();
@@ -104,8 +113,8 @@ void debugJson() {
 
 int main(int argc, char **argv) {
 	int result;
-
-	login("x@src.bz", "1");
+	debugConvolist();
+	//login("x@src.bz", "1");
 	// debugJson();
 	// debugNet();
 	result = 0;

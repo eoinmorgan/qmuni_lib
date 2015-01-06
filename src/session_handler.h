@@ -17,11 +17,15 @@ public:
 	~SessionHandler();
 
 	void debugJson(string json);
+	string printf();
 
-	int login(string email, string code);
 	string getUri();
 	int setUri(string uri);
-	//void fetchConversationList();
+
+	int login(string email, string code);
+
+	//not sure what this should return at the momenet
+	void fetchConversationList();
 
 	
 
@@ -31,6 +35,7 @@ private:
 	string uri_;
 	Net *net_;
 	SessionModel *session_model_;
+
 	
 };
 

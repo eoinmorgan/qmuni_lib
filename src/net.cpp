@@ -28,7 +28,8 @@ Net::Net(){
 }
 
 int Net::httpGet(const string path, map<string, string> *headers, string *responseData)  {
-	return httpCall(POCO_GET, path, headers, NULL, responseData);
+	string no_input;
+	return httpCall(POCO_GET, path, headers, no_input, responseData);
 }
 
 int Net::httpDelete(const string path, map<string, string> *headers, string *responseData)  {
@@ -47,12 +48,10 @@ int Net::httpPut(const string path, map<string, string> *headers, const string &
 
 int Net::httpCall(const string &call, const string &path, map<string, string> *headers, const string &requestData, string *responseData)  {
 	int result = 0;
-
 	try {
 		Poco::URI uri(path);
 		Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
 		Poco::Net::HTTPRequest req(call, uri.getPathAndQuery(), Poco::Net::HTTPMessage::HTTP_1_1);
- 
 		//req.set("User-Agent","BSecure Client 1.0");
 
 		// DEBUG:
@@ -101,17 +100,20 @@ int Net::httpCall(const string &call, const string &path, map<string, string> *h
 			out << requestData;
 		}
 
+
 		// collect the response from the server
 		Poco::Net::HTTPResponse res;
+		istream &rs = session.receiveResponse(res);
+		Poco::StreamCopier::copyToString(rs, *responseData);
+		
+		
 		vector<Poco::Net::HTTPCookie> cookies;
 		res.getCookies(cookies);
+		// DEBUG:
+		// cerr << "number of cookies :" << cookies.size() << endl;
 		for(int it = 0; it!=cookies.size();++it){
 			m_jar->addCookie(cookies[it]);
 		}
-
-		istream &rs = session.receiveResponse(res);
-		Poco::StreamCopier::copyToString(rs, *responseData);
-
 		result = res.getStatus();
 	} catch (Poco::Exception &ex) {
 		cerr << ex.displayText() << endl;

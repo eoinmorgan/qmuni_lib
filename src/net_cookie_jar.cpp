@@ -31,6 +31,8 @@ Poco::Net::NameValueCollection CookieJar::sendCookies(){
 	std::map<string, Poco::Net::HTTPCookie>::iterator cookie_iterator = m_jar.begin();
 	for(; cookie_iterator != m_jar.end(); ++cookie_iterator){
 		result.add(cookie_iterator->second.getName(), cookie_iterator->second.getValue());
+		// DEBUG:
+		// cerr << "sent cookie: " << cookie_iterator->second.getName() << endl;
 	}
 
 

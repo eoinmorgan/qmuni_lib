@@ -33,10 +33,9 @@ Model::~Model() {
 
 
 void Model::parseJson(const string &json){
-
+    cerr << "json to parse: " << json << endl;
     char *target = (char*)json.c_str();
     data_.Parse(target);
-    cout << "fetched Json" << endl;
 
 }
 string Model::storeJson(){

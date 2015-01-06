@@ -13,7 +13,7 @@ using namespace std;
 
 SessionHandler::SessionHandler() {
 	// TODO: make this go away, remove it from header and prototype
-	uri_ = QAPI_BASE_URI;
+	uri_ = QAPI_BASE_URI + "/session/";
 	//plan on making it so the session handler is able to acceess and manipulate each of the models it is responsible for.  
 	//Map<int,Model::Model> model_list_;
 	session_model_ = new SessionModel(uri_);
@@ -58,8 +58,6 @@ int SessionHandler::login(string email, string code) {
 	//cout << "uri: " << uri_ << endl; 
 	map<string, string> noHeaders;
 	
-
-	// TODO: this should be in the handler
 	int status_code = 0;
 	string *output = new string();
 
@@ -69,7 +67,6 @@ int SessionHandler::login(string email, string code) {
 	// TODO: this should be in the base model
 	status_code = net_->httpPost(uri_, &noHeaders, input, output);
 
-	// TODO: this should be in the handler
 	if (status_code == 200 || status_code == 201) {
 		//char *json = (char *)output->c_str();
 		
@@ -86,11 +83,37 @@ int SessionHandler::login(string email, string code) {
 
 
 
-/*
+
 void SessionHandler::fetchConversationList(){
 	
-	session_model_->fetchConversationList();
+	map<string, string> noHeaders;
+	string conversation_uri = QAPI_BASE_URI + "/conversation/";
+	
+	int status_code = 0;
+	string *output = new string();
+	// DEBUG:
+	// cerr << "URI IS ME:" << uri_ << endl;
+
+	// TODO: this should be in the base model
+
+	status_code = net_->httpGet(conversation_uri, &noHeaders, output);
+
+	// DEBUG:
+	// cerr << "status code: " << status_code << endl;
+	if (status_code == 200 ) {
+		session_model_->parseJson(*output);		
+	}
+
+	// TODO:
+	// fix printf method
+	// cerr << net->printf();
+	delete output;
+	output = NULL;
 
 }
 
-*/
+string SessionHandler::printf(){
+	return net_->printf();
+}
+
+
