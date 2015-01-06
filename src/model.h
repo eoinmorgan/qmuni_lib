@@ -19,7 +19,6 @@ protected:
 
 	
 	rapidjson::Document data_;
-	Net *net_;
 	bool m_login_status;
 	void debugNet();
 	void fetchJson(const string &json);

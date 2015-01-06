@@ -28,7 +28,8 @@ public:
 	
 private:
 	string m_token;
-	string m_uri;
+	string uri_;
+	Net *net_;
 	
 };
 

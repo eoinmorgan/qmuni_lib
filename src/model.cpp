@@ -15,7 +15,6 @@ using namespace std;
 Model::Model() {
     rapidjson::Document data_;
     extern string url;
-    net_ = new Net();
     uri_ = url;
    cout << "net made according to model" << endl;
    
@@ -23,7 +22,6 @@ Model::Model() {
 
 Model::Model(string uri) {
 	extern string url;
-    net_ = new Net();
     m_uri = uri;
 	m_token = "";
 	
@@ -31,14 +29,11 @@ Model::Model(string uri) {
 
 Model::Model(string uri, string tokenIn) {
 	extern string url;
-    net_ = new Net();
     m_uri = uri;
 	m_token = tokenIn;
 	
 }
 Model::~Model() {
-     delete net_;
-    net_ = NULL;
 }
 
 
