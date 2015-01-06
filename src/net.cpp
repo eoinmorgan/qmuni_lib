@@ -59,8 +59,18 @@ int Net::httpCall(const string &call, const string &path, map<string, string> *h
 		// req.setHost("bsecure");
 		// req.setHost("127.0.0.1");
 
+		//create default headers
+		map<string,string> default_headers;
+		default_headers["Content-Type"] = "application/json";
+    	default_headers["User-Agent"] = "Qmuni Client Library v1";
+
+		// add default headers to this request
+		addHeadersToRequest(&req, &default_headers);
+		
 		// add or replace additional headers for this request
-		addHeadersToRequest(&req, headers);
+		if(!headers->empty()){
+			addHeadersToRequest(&req, headers);
+		}
 		
 		if(!m_jar->empty()){
 			req.setCookies(m_jar->sendCookies());

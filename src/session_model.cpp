@@ -5,6 +5,8 @@
 
 #include "session_model.h"
 
+
+
 SessionModel::SessionModel() : Model() {
 	// TODO: This really should be a constant of the SessionModel so that the compiler can optimize it
 	uri_ = QAPI_BASE_URI + "/session/";
@@ -31,8 +33,7 @@ int SessionModel::login(string email, string code) {
 
 	// TODO: this needs to not be here, should be in net
 	map<string, string> noHeaders;
-	noHeaders.insert(make_pair<string, string>("Content-Type", "application/json"));
-	noHeaders.insert(make_pair<string, string>("User-Agent", "Qmuni Client Library v1"));
+	
 
 	// TODO: this should be in the handler
 	int status_code = 0;

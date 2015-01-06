@@ -10,6 +10,7 @@
 
 using namespace std;
 
+
 class Net {
 public:
 	Net();
@@ -21,6 +22,6 @@ public:
 	string printf();
 private:
 	int httpCall(const string &call, const string &path, map<string, string> *headers, const string &requestData, string *responseData) ;
-	void addHeadersToRequest(Poco::Net::HTTPRequest *request, map<string, string> *headers) const;
+	void addHeadersToRequest(Poco::Net::HTTPRequest *request, map<string, string> *headers) const;	
 	//Vector<Poco::Net::HTTPCookie> Net::getRequestCookies(const &Poco::Net::HTTPRequest request);
 };
