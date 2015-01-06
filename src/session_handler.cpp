@@ -16,7 +16,7 @@ SessionHandler::SessionHandler() {
 	uri_ = QAPI_BASE_URI;
 	//plan on making it so the session handler is able to acceess and manipulate each of the models it is responsible for.  
 	//Map<int,Model::Model> model_list_;
-	m_session_model = new SessionModel(uri_);
+	session_model_ = new SessionModel(uri_);
 	net_ = new Net();
 
 	m_token = "";
@@ -24,15 +24,15 @@ SessionHandler::SessionHandler() {
 
 SessionHandler::SessionHandler(string uri) {
 	uri_ = uri;
-	m_session_model = new SessionModel(uri_);
+	session_model_ = new SessionModel(uri_);
 	m_token = "";
 	//Map<int,Model> model_list_;
-	SessionModel m_session_model(uri_);
+	SessionModel session_model_(uri_);
 }
 
 SessionHandler::~SessionHandler() {
-	delete m_session_model;
-	m_session_model = NULL;
+	delete session_model_;
+	session_model_ = NULL;
 }
 
 string SessionHandler::getUri() {
@@ -45,7 +45,7 @@ int SessionHandler::setUri(string uri) {
 	return 0;
 }
 void SessionHandler::debugJson(string json){
-m_session_model->debugJson(json);
+session_model_->debugJson(json);
 
 }
 int SessionHandler::login(string email, string code) {
@@ -73,7 +73,7 @@ int SessionHandler::login(string email, string code) {
 	if (status_code == 200 || status_code == 201) {
 		//char *json = (char *)output->c_str();
 		
-		//fetchJson(*output);
+		session_model_->parseJson(*output);
 	}
 
 	//cout << net->printf();
@@ -89,7 +89,7 @@ int SessionHandler::login(string email, string code) {
 /*
 void SessionHandler::fetchConversationList(){
 	
-	m_session_model->fetchConversationList();
+	session_model_->fetchConversationList();
 
 }
 

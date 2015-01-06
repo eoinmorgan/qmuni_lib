@@ -11,17 +11,18 @@
 using namespace std;
 
 class Model {
+private:
+	
 protected:
-	string m_userName;
-	string m_emailAddres;
-	string m_token;
+	string userName_;
+	string emailAddres_;
+	string token_;
 	string uri_;
 
 	
 	rapidjson::Document data_;
-	bool m_login_status;
+	bool login_status_;
 	void debugNet();
-	void fetchJson(const string &json);
 	string storeJson();
 	rapidjson::Value::MemberIterator getJsonIterator(string name);
 	
@@ -32,24 +33,18 @@ public:
 	Model(string uri, string token);
 	~Model();
 
-string m_uri;
-	string get_user_name() { return m_userName; };
-	string get_email_address() { return m_emailAddres; };
-	string get_token() { return m_token; };
-	bool get_login() { return m_login_status; };
+	
+	string get_user_name() { return userName_; };
+	string get_email_address() { return emailAddres_; };
+	string get_token() { return token_; };
+	bool get_login() { return login_status_; };
 
 	int set_user_name(string input_name);
 	int set_email_address(string input_addresss);
 	int set_token(string input_token);
 	int set_login(bool input_login_status);
 	void debugJson(string json);
-private:
-	
-	
-	
-
-
-
+	void parseJson(const string &json);
 };
 
 

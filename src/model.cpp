@@ -14,30 +14,25 @@ using namespace std;
 
 Model::Model() {
     rapidjson::Document data_;
-    extern string url;
-    uri_ = url;
+    uri_ = QAPI_BASE_URI;
    cout << "net made according to model" << endl;
-   
 }
 
 Model::Model(string uri) {
-	extern string url;
-    m_uri = uri;
-	m_token = "";
-	
+    uri_ = QAPI_BASE_URI;
+	token_ = "";
 }
 
 Model::Model(string uri, string tokenIn) {
-	extern string url;
-    m_uri = uri;
-	m_token = tokenIn;
-	
+    uri_ = QAPI_BASE_URI;
+	token_ = tokenIn;
 }
+
 Model::~Model() {
 }
 
 
-void Model::fetchJson(const string &json){
+void Model::parseJson(const string &json){
 
     char *target = (char*)json.c_str();
     data_.Parse(target);
@@ -54,7 +49,7 @@ string Model::storeJson(){
 void Model::debugJson(string json){
     cout << "starting debugJson" << endl; 
     
-    fetchJson(json);
+    parseJson(json);
     //rapidjson::Value::MemberIterator it  = getJsonIterator("created");
     for (int i = 0; i < data_.Size(); ++i){
         

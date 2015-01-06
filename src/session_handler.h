@@ -23,13 +23,14 @@ public:
 	int setUri(string uri);
 	//void fetchConversationList();
 
-	SessionModel *m_session_model;
+	
 
 	
 private:
 	string m_token;
 	string uri_;
 	Net *net_;
+	SessionModel *session_model_;
 	
 };
 
