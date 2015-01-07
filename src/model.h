@@ -45,6 +45,11 @@ public:
 	int set_login(bool input_login_status);
 	void debugJson(string json);
 	void parseJson(const string &json);
+
+	int modelGet(const string path, map<string, string> *headers, string *responseData);
+	int modelPost();
+	int modelPut();
+	int modelDelete();
 };
 
 

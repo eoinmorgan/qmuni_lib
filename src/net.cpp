@@ -123,7 +123,7 @@ int Net::httpCall(const string &call, const string &path, map<string, string> *h
 	return result;
 }
 
-void Net::addHeadersToRequest(Poco::Net::HTTPRequest *request, map<string, string> *headers) const {
+void Net::addHeadersToRequest(Poco::Net::HTTPRequest *request, map<string, string> *headers) {
 	for (map<string, string>::iterator it = headers->begin(); it != headers->end(); ++it) {
 		// for the current header, set the key and value of that header in the request
 		request->set(it->first, it->second);

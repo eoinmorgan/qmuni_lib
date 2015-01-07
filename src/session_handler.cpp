@@ -95,7 +95,6 @@ void SessionHandler::fetchConversationList(){
 	// cerr << "URI IS ME:" << uri_ << endl;
 
 	// TODO: this should be in the base model
-
 	status_code = net_->httpGet(conversation_uri, &noHeaders, output);
 
 	// DEBUG:

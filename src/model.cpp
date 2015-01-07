@@ -6,6 +6,7 @@
 #include "rapidjson/stringbuffer.h"
 #include "rapidjson/writer.h"
 
+#include "net.h"
 #include "qmuni.h"
 #include "model.h"
 
@@ -15,7 +16,6 @@ using namespace std;
 Model::Model() {
     rapidjson::Document data_;
     uri_ = QAPI_BASE_URI;
-   cout << "net made according to model" << endl;
 }
 
 Model::Model(string uri) {
@@ -57,11 +57,8 @@ void Model::debugJson(string json){
         const rapidjson::Value &message = convo["last_message"];
         cout << message["message"].GetInt() << endl;
     }
-   
 
 }
-
-   
 
 rapidjson::Value::MemberIterator Model::getJsonIterator(string name){
     char *target = (char*)name.c_str();
@@ -73,5 +70,17 @@ rapidjson::Value::MemberIterator Model::getJsonIterator(string name){
     return it;
    
 }
+int Model::modelGet(const string path, map<string, string> *headers, string *responseData){
+   
+    return Net::httpGet(uri_, headers, responseData)
+}
+int Model::modelPost(){
 
+}
+int Model::modelPut(){
+
+}
+int Model::modelDelete(){
+
+}
 

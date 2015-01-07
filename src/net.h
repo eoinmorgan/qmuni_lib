@@ -15,13 +15,13 @@ class Net {
 public:
 	Net();
 	CookieJar *m_jar;
-	int httpGet(const string path, map<string, string> *headers, string *responseData) ;
-	int httpDelete(const string path, map<string, string> *headers, string *responseData) ;
-	int httpPost(const string path, map<string, string> *headers, const string &requestData, string *responseData) ;
-	int httpPut(const string path, map<string, string> *headers, const string &requestData, string *responseData) ;
+	static int httpGet(const string path, map<string, string> *headers, string *responseData) ;
+	static int httpDelete(const string path, map<string, string> *headers, string *responseData) ;
+	static int httpPost(const string path, map<string, string> *headers, const string &requestData, string *responseData) ;
+	static int httpPut(const string path, map<string, string> *headers, const string &requestData, string *responseData) ;
 	string printf();
 private:
 	int httpCall(const string &call, const string &path, map<string, string> *headers, const string &requestData, string *responseData) ;
-	void addHeadersToRequest(Poco::Net::HTTPRequest *request, map<string, string> *headers) const;	
+	static void addHeadersToRequest(Poco::Net::HTTPRequest *request, map<string, string> *headers) ;	
 	//Vector<Poco::Net::HTTPCookie> Net::getRequestCookies(const &Poco::Net::HTTPRequest request);
 };
