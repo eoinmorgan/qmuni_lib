@@ -12,13 +12,10 @@ public:
 	SessionHandler();
 	SessionHandler(string uri);
 	SessionHandler(string uriIn, string token, Model session);
-
-
 	~SessionHandler();
 
 	void debugJson(string json);
 	string printf();
-
 	string getUri();
 	int setUri(string uri);
 
@@ -33,7 +30,6 @@ public:
 private:
 	string m_token;
 	string uri_;
-	Net *net_;
 	SessionModel *session_model_;
 
 	

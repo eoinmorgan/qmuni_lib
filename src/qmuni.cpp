@@ -15,7 +15,7 @@ string url = PROTOCOL + "://" + SERVER + "/api/v" + VERSION;
 // debug the network connection
 
 int debugNet() {
-	Net *net = new Net();
+	
 	map<string, string> noHeaders;
 	map<string, string> jsonHeader;
 	string uri = "http://bsecure/api/v0/session";
@@ -28,7 +28,7 @@ int debugNet() {
 	noHeaders.insert(make_pair<string, string>("User-Agent", "Qmuni Client Library v1"));
 	
 	string *output = new string;
-	int result = net->httpPost(uri, &jsonHeader, data, output);
+	int result = Net::Instance()->httpPost(uri, &jsonHeader, data, output);
 	cout << "post result: " << result << " " << *output << endl;
 
 	//cout << "get result: ";
@@ -38,9 +38,7 @@ int debugNet() {
 	//cout << "delete result: ";
 	//cout << net->httpDelete(uri, noHeaders) << endl;
 
-	delete net;
 	delete output;
-	net = NULL;
 	output = NULL;
 
 	return result;

@@ -21,10 +21,16 @@
 #define POCO_CONNECT  Poco::Net::HTTPRequest::HTTP_CONNECT
 
 using namespace std;
-
+Net *Net::instance_ = NULL;
 // sudo tcpdump -i lo0 port 80 and dst 127.0.0.1
 Net::Net(){
-	m_jar = new CookieJar();
+	jar_ = new CookieJar();
+}
+Net* Net::Instance(){
+	if(!instance_){
+		instance_ = new Net;
+	}
+	return instance_;
 }
 
 int Net::httpGet(const string path, map<string, string> *headers, string *responseData)  {
@@ -71,8 +77,8 @@ int Net::httpCall(const string &call, const string &path, map<string, string> *h
 			addHeadersToRequest(&req, headers);
 		}
 		
-		if(!m_jar->empty()){
-			req.setCookies(m_jar->sendCookies());
+		if(!jar_->empty()){
+			req.setCookies(jar_->sendCookies());
 		}
 		
 		bool hasData = false;
@@ -112,7 +118,7 @@ int Net::httpCall(const string &call, const string &path, map<string, string> *h
 		// DEBUG:
 		// cerr << "number of cookies :" << cookies.size() << endl;
 		for(int it = 0; it!=cookies.size();++it){
-			m_jar->addCookie(cookies[it]);
+			jar_->addCookie(cookies[it]);
 		}
 		result = res.getStatus();
 	} catch (Poco::Exception &ex) {
@@ -135,10 +141,10 @@ void Net::addHeadersToRequest(Poco::Net::HTTPRequest *request, map<string, strin
 Vector<Poco::Net::HTTPCookie> Net::getRequestCookies(const &Poco::Net::HTTPRequest request)
 {
 
-	return m_jar.getRequestCookies(request);
+	return jar_.getRequestCookies(request);
 }
 */
 
 string Net::printf(){
-	return m_jar->printf();
+	return jar_->printf();
 }

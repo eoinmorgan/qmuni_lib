@@ -18,7 +18,7 @@ protected:
 	string emailAddres_;
 	string token_;
 	string uri_;
-
+	int id_;
 	
 	rapidjson::Document data_;
 	bool login_status_;
@@ -46,11 +46,13 @@ public:
 	void debugJson(string json);
 	void parseJson(const string &json);
 
-	int modelGet(const string path, map<string, string> *headers, string *responseData);
-	int modelPost();
-	int modelPut();
-	int modelDelete();
+	int save();
+	int save(int id);
+	int load();
+	int load(int id);
+	int destroy();
+	int destroy(int id);
+	int create();
 };
-
 
 

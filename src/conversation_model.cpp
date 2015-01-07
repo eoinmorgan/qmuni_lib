@@ -7,7 +7,7 @@ ConversationModel::ConversationModel() : Model(){
 	uri_ = QAPI_BASE_URI + "/conversation/";
 
 }
-string ConversationModel::getConversation(){
-	return "conversation_id_;";
+string ConversationModel::getConversationList(){
+	return uri_;
 }
 
