@@ -91,7 +91,8 @@ int Model::load(){
     map<string, string> no_headers;
     int status_code;
     string *output = new string();
-    status_code = Net::Instance()->httpGet(uri_, &no_headers,output);
+    status_code = Net::Instance()->httpGet(uri_, &no_headers, output);
+    this->parseJson(*output);
     return status_code;    
 }
 int Model::load(int id){
@@ -99,7 +100,8 @@ int Model::load(int id){
     int status_code;
     string *output = new string();
     string request_uri = uri_ + ":" + to_string(id);
-    status_code = Net::Instance()->httpGet(request_uri, &no_headers,output);
+    status_code = Net::Instance()->httpGet(request_uri, &no_headers, output);
+    this->parseJson(*output);
     return status_code;    
 }
 int Model::destroy(){

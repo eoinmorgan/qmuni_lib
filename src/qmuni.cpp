@@ -6,6 +6,7 @@
 
 
 #include "qmuni.h"
+#include "conversation_model.h"
 
 
 using namespace std;
@@ -61,7 +62,10 @@ void debugConvolist(){
 	cerr << "login status: " << status_code << endl;
 	//cerr << "login cookies: " << session_handler->printf();
 	if (status_code == 200){
-		session_handler->fetchConversationList();
+		ConversationModel *conversation = new ConversationModel();
+		 status_code = conversation->load(1);
+		 cerr << "convo load status: " << status_code << endl;
+
 	}
 }
 

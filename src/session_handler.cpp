@@ -53,35 +53,6 @@ int SessionHandler::login(string email, string code) {
 }
 
 
-
-
-void SessionHandler::fetchConversationList(){
-	
-	map<string, string> noHeaders;
-	string conversation_uri = QAPI_BASE_URI + "/conversation/";
-	
-	int status_code = 0;
-	string *output = new string();
-	// DEBUG:
-	//cerr << "URI IS ME:" << uri_ << endl;
-
-	// TODO: this should be in the base model
-	status_code = Net::Instance()->httpGet(conversation_uri, &noHeaders, output);
-
-	// DEBUG:
-	//cerr << "status code: " << status_code << endl;
-	if (status_code == 200 ) {
-		session_model_->parseJson(*output);		
-	}
-
-	// TODO:
-	// fix printf method
-	// cerr << net->printf();
-	delete output;
-	output = NULL;
-
-}
-
 string SessionHandler::printf(){
 	return Net::Instance()->printf();
 }
