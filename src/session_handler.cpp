@@ -16,7 +16,7 @@ SessionHandler::SessionHandler() {
 	uri_ = QAPI_BASE_URI + "/session/";
 	//plan on making it so the session handler is able to acceess and manipulate each of the models it is responsible for.  
 	//Map<int,Model::Model> model_list_;
-	session_model_ = new SessionModel(uri_);
+	session_model_ = new SessionModel();
 	m_token = "";
 }
 

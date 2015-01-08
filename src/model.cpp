@@ -42,7 +42,7 @@ string Model::storeJson(){
     rapidjson::StringBuffer buffer;
     rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
     data_.Accept(writer);
-    result = buffer.GetString();
+    string  result = buffer.GetString();
     cerr << "json to be stored: " << result << endl;
     return result;
 }
@@ -76,50 +76,50 @@ int Model::save(){
     map<string, string> no_headers;
     int status_code;
     string *output = new string();
-    status_code = Net::Instance()->httpPost(uri_,&no_headers,this->storeJson(),output)
+    status_code = Net::Instance()->httpPost(uri_,&no_headers,this->storeJson(),output);
     return status_code;   
 }
 int Model::save(int id){
     map<string, string> no_headers;
     int status_code;
     string *output = new string();
-    string request_uri = uri_ + ":" + id;
-    status_code = Net::Instance()->httpPost(request_uri, no_headers, this->storeJson(), output)
+    string request_uri = uri_+":"+to_string(id);
+    status_code = Net::Instance()->httpPost(request_uri, &no_headers, this->storeJson(), output);
     return status_code;    
 }
 int Model::load(){
     map<string, string> no_headers;
     int status_code;
     string *output = new string();
-    status_code = Net::Instance()->httpGet(uri_,no_headers,output)
+    status_code = Net::Instance()->httpGet(uri_, &no_headers,output);
     return status_code;    
 }
 int Model::load(int id){
     map<string, string> no_headers;
     int status_code;
     string *output = new string();
-    string request_uri = uri_ + ":" + id;
-    status_code = Net::Instance()->httpGet(request_uri,no_headers,output)
+    string request_uri = uri_ + ":" + to_string(id);
+    status_code = Net::Instance()->httpGet(request_uri, &no_headers,output);
     return status_code;    
 }
 int Model::destroy(){
     map<string, string> no_headers;
     int status_code;
     string *output = new string();
-    status_code = Net::Instance()->httpDelete(uri_,no_headers,output)
+    status_code = Net::Instance()->httpDelete(uri_, &no_headers,output);
     return status_code;   
 }
 int Model::destroy(int id){
     map<string, string> no_headers;
     int status_code;
     string *output = new string();
-    status_code = Net::Instance()->httpDelete(uri_,no_headers,output)
+    status_code = Net::Instance()->httpDelete(uri_, &no_headers,output);
     return status_code;    
 }
 int Model::create(){
     map<string, string> no_headers;
     int status_code;
     string *output = new string();
-    status_code = Net::Instance()->httpPut(uri_,no_headers,output)
+    status_code = Net::Instance()->httpPut(uri_, &no_headers, this->storeJson(), output);
     return status_code;
 }
