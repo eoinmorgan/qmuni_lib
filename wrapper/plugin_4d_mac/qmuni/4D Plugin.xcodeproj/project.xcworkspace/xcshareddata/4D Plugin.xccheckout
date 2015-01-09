@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>2B5165B1-C15B-4EB6-85D0-82E25EF70BA7</string>
+	<key>IDESourceControlProjectName</key>
+	<string>4D Plugin</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>DD5B4A90CE2C3C7511FD94F8C048ADD0018A9AE1</key>
+		<string>github.com:cweil/qmuni_lib.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>wrapper/plugin_4d_mac/qmuni/4D Plugin.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>DD5B4A90CE2C3C7511FD94F8C048ADD0018A9AE1</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:cweil/qmuni_lib.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>DD5B4A90CE2C3C7511FD94F8C048ADD0018A9AE1</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>DD5B4A90CE2C3C7511FD94F8C048ADD0018A9AE1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>qmuni_lib</string>
+		</dict>
+	</array>
+</dict>
+</plist>

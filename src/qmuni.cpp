@@ -133,7 +133,7 @@ void debugJson() {
 	SessionHandler *session_handler = new SessionHandler();
 	session_handler->debugJson(json);
 }
-
+/*
 int main(int argc, char **argv) {
 	int result;
 	debugConvoGetterAndSetter();
@@ -146,3 +146,4 @@ int main(int argc, char **argv) {
 	return result;	
 }
 
+*/

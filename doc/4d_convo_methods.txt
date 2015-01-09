@@ -1,0 +1,73 @@
+getConversations()
+/* returns a 4d object array */
+[
+    {
+        id: 1412312,
+        contacts: {
+            contact_names: [    // 4d ARRAY STRING
+                "email1",
+                "email2",
+                ...
+            ],
+            contact_ids: [      // 4d ARRAY LONGINT?
+                123412,
+                098147,
+                ...
+            ]
+        },
+        last_date: DATE_OBJ,          // 4d date type
+        subject: "SUBJECT"
+    },
+    ...
+]
+getContactList()
+/* returns a C_OBJECT */
+{
+    contact_names: [    // 4d ARRAY STRING
+        "email1",
+        "email2",
+        ...
+    ],
+    contact_ids: [      // 4d ARRAY LONGINT?
+        123412,
+        098147,
+        ...
+    ]
+}
+
+getMessageList(conversation_id)
+/* returns a 4d object array */
+[
+    {
+        id: 1412312,
+        contact: {
+            contact_name: "eoin@eoin.com",
+            contact_ids: 123412,
+        },
+        date: DATE_OBJ,          // 4d date type
+        content: "MESSAGE CONTENT BLAH BLAH BLAH"
+        files: [                 // 4d text array of file urls
+            "link1",
+            ...
+        ]
+    },
+    ...
+]
+
+getMessage(message_id)
+/* returns a C_OBJECT type */
+{
+    contact: {
+        contact_name: "eoin@eoin.com",
+        contact_ids: 123412,
+    },
+    file_links: [
+        "link 1",
+        ...
+    ],
+    file_sizes: [
+        2048,
+        ...
+    ],
+    content: "MESSAGE CONTENT BLAH BLAH BLAH",
+}
