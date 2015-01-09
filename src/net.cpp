@@ -2,16 +2,14 @@
 #include <string>
 #include <cstdio>
 
-#include <Poco/Net/HTTPClientSession.h>
-#include <Poco/Net/HTTPRequest.h>
-
-#include <Poco/StreamCopier.h>
-#include <Poco/Path.h>
-#include <Poco/URI.h>
-#include <Poco/Exception.h>
+#include "Poco/Net/HTTPClientSession.h"
+#include "Poco/Net/HTTPRequest.h"
+#include "Poco/StreamCopier.h"
+#include "Poco/Path.h"
+#include "Poco/URI.h"
+#include "Poco/Exception.h"
 
 #include "net.h"
-
 
 #define POCO_POST  Poco::Net::HTTPRequest::HTTP_POST
 #define POCO_PUT  Poco::Net::HTTPRequest::HTTP_PUT
@@ -21,11 +19,14 @@
 #define POCO_CONNECT  Poco::Net::HTTPRequest::HTTP_CONNECT
 
 using namespace std;
+
 Net *Net::instance_ = NULL;
 // sudo tcpdump -i lo0 port 80 and dst 127.0.0.1
+
 Net::Net(){
 	jar_ = new CookieJar();
 }
+
 Net* Net::Instance(){
 	if(!instance_){
 		instance_ = new Net;

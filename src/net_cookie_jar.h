@@ -1,18 +1,18 @@
 #pragma once
-#include <Poco/Net/HTTPCookie.h>
+
 #include <map>
 
+#include "Poco/Net/HTTPCookie.h"
+
 using namespace std;
-class CookieJar{
+
+class CookieJar {
 public:
 	CookieJar();
-	 map<string, Poco::Net::HTTPCookie> m_jar;
+	map<string, Poco::Net::HTTPCookie> m_jar;
 	void addCookie(Poco::Net::HTTPCookie cookie);
 	Poco::Net::NameValueCollection sendCookies();
 	int removeExpiredCookies();
 	string printf();
 	bool empty();
-
-private: 
-
 };

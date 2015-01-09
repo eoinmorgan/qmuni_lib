@@ -1,6 +1,6 @@
 
 #include "qmuni.h"
-#include "conversation_collection.h"
+//#include "conversation_collection.h"
 #include "conversation_model.h"
 
 ConversationModel::ConversationModel() : Model(){
@@ -8,14 +8,14 @@ ConversationModel::ConversationModel() : Model(){
 	uri_ = QAPI_BASE_URI + "/conversation/";
 
 }
-ModelCollection<Conversation> ConversationModel::getConversationList(ModelCollection<Conversation> *conversations){
-	this->load();
-	for (int i = 0; i < data_.Size(); ++i){      
-        const rapidjson::Value &convo = data_[i];
-       	conversations->addModel(&convo);
-    }
-	return conversations;
-}
+//ModelCollection<Conversation> ConversationModel::getConversationList(ModelCollection<Conversation> *conversations){
+//	this->load();
+//	for (int i = 0; i < data_.Size(); ++i){      
+//        const rapidjson::Value &convo = data_[i];
+//       	conversations->addModel(&convo);
+//    }
+//	return conversations;
+//}
 
 
 string ConversationModel::getSubject(){
