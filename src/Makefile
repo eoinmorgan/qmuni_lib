@@ -1,7 +1,7 @@
 CXX=g++
 CFLAGS=-c -g -Wall
 LDFLAGS=-lPocoUtil -lPocoNet -lPocoFoundation 
-SOURCES=qmuni.cpp net.cpp session_handler.cpp session_model.cpp net_cookie_jar.cpp conversation_model.cpp model.cpp conversation_collection.cpp
+SOURCES=qmuni.cpp net.cpp session_handler.cpp session_model.cpp net_cookie_jar.cpp conversation_model.cpp model.cpp model_collection.cpp
 INC=../vendor/rapidjson/include
 INC_PARAMS=$(INC:%=-I%)
 OBJECTS=${SOURCES:.cpp=.o}

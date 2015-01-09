@@ -4,12 +4,13 @@
 
 using namespace std
 
-template <clase Model>
+template <clase TModel>
 class Collection {
 private:
 
 protected:
 
 public:
-	vecotor<Model> models;
+	vecotor<TModel> models;
+	Collection();
 };

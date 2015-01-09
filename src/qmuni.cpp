@@ -65,8 +65,29 @@ void debugConvolist(){
 		ConversationModel *conversation = new ConversationModel();
 		 status_code = conversation->load(1);
 		 cerr << "convo load status: " << status_code << endl;
+		 delete conversation;
+		 conversation = NULL;
+		}
+}
+void debugConvoGetterAndSetter(){
+	SessionHandler *session_handler = new SessionHandler();
+	int status_code = session_handler->login("agrandstaff@cweil.com", "a");
+	cerr << "login status: " << status_code << endl;
+	//cerr << "login cookies: " << session_handler->printf();
+	if (status_code == 200){
+		ConversationModel *conversation = new ConversationModel();
+		 status_code = conversation->load(1);
+		 cerr << "conversation ID: " << conversation->getInt("conversation") << endl;
+		 cerr << "conversation subject: "<< conversation->getString("subject") << endl;
+		 conversation->setString("subject","math");
+		 conversation->setInt("conversation",42);
+		 conversation->setString("created", "jan 22 2012");
+		 cerr << "conversation ID: " << conversation->getConversationID() << endl;
+		 cerr << "conversation subject: "<< conversation->getSubject() << endl;
 
-	}
+		 delete conversation;
+		 conversation = NULL;
+		}
 }
 
 int login(const string email, const string code) {
@@ -115,7 +136,8 @@ void debugJson() {
 
 int main(int argc, char **argv) {
 	int result;
-	debugConvolist();
+	debugConvoGetterAndSetter();
+	//debugConvolist();
 	//login("x@src.bz", "1");
 	// debugJson();
 	// debugNet();

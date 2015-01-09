@@ -125,3 +125,49 @@ int Model::create(){
     status_code = Net::Instance()->httpPut(uri_, &no_headers, this->storeJson(), output);
     return status_code;
 }
+void Model::setString(string key, string value){
+
+    char *c_value = (char*)value.c_str();
+    char *c_key = (char*)key.c_str();
+
+    assert(data_.IsObject());
+    if(!data_.HasMember(c_key)){
+         data_.AddMember(rapidjson::StringRef(c_key), rapidjson::StringRef(c_value), data_.GetAllocator());
+        assert(data_.IsObject());
+        cerr << "new key:value pair added: " << c_key << ":" << c_value << endl;
+    }
+    else{
+        data_[c_key].SetString(c_value, data_.GetAllocator());
+        assert(data_.IsObject());
+        cerr << "key:value pair modfied: " << c_key << ":" << c_value << endl;
+    }
+}
+void Model::setInt(string key, int value){
+
+    
+    char *c_key = (char*)key.c_str();
+
+    assert(data_.IsObject());
+    if(!data_.HasMember(c_key)){
+         data_.AddMember(rapidjson::StringRef(c_key), value, data_.GetAllocator());
+        assert(data_.IsObject());
+        cerr << "new key:value pair added: " << c_key << ":" << value << endl;
+    }
+    else{
+        data_[c_key].SetInt(value);
+        assert(data_.IsObject());
+        cerr << "key:value pair modfied: " << c_key << ":" << value << endl;
+    }
+}
+int Model::getInt(string key){
+    char *c_key = (char*)key.c_str();
+    rapidjson::Value &val = data_[c_key];
+    int result = val.GetInt(); 
+    return result;
+}
+string Model::getString(string key){
+    char *c_key = (char*)key.c_str();
+    rapidjson::Value &val = data_[c_key];
+    string result = val.GetString(); 
+    return result;
+}

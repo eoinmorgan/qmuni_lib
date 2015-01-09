@@ -48,7 +48,9 @@ session_model_->debugJson(json);
 }
 int SessionHandler::login(string email, string code) {
 	session_model_->setEmail(email);
+	cerr << "email set for sure" << endl;
 	session_model_->setCode(code);
+	cerr << "code set also for sure" << endl;
 	return session_model_->save();
 }
 

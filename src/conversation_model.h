@@ -21,5 +21,10 @@ public:
 	string getConversationList();
 	string newConversation();
 
+	string getSubject();
+	int getConversationID();
 
+	void setSubject(string subject);
+	void setCreateDate(string subject);
+	void setConversationID(int id);
 };

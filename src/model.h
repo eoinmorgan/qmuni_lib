@@ -14,11 +14,10 @@ class Model {
 private:
 	
 protected:
-	string userName_;
 	string emailAddres_;
 	string token_;
 	string uri_;
-	int id_;
+	
 	
 	rapidjson::Document data_;
 	bool login_status_;
@@ -33,8 +32,6 @@ public:
 	Model(string uri, string token);
 	~Model();
 
-	
-	string get_user_name() { return userName_; };
 	string get_email_address() { return emailAddres_; };
 	string get_token() { return token_; };
 	bool get_login() { return login_status_; };
@@ -53,6 +50,12 @@ public:
 	int destroy();
 	int destroy(int id);
 	int create();
+
+	void setString(string key, string value);
+	void setInt(string key, int value);
+
+	int getInt(string key);
+	string getString(string key);
 };
 
 
